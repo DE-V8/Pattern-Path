@@ -1,5 +1,3 @@
-# Pattern-Path
-PatternPath is a free, pattern-based learning platform that helps engineering students learn once, revise intelligently, and retain core concepts for real interviews — without selling courses or certificates.
 # PatternPath — Learn once, revise forever
 
 PatternPath is a **free, pattern-based learning platform** built for engineering students who want real understanding, long-term retention, and interview readiness — without selling courses, certificates, or locking content behind paywalls.
