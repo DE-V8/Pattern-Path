@@ -1,6 +1,6 @@
-# PatternPath — Learn once, revise forever
+# PatternPath - Learn once, revise forever
 
-PatternPath is a **free, pattern-based learning platform** built for engineering students who want real understanding, long-term retention, and interview readiness — without selling courses, certificates, or locking content behind paywalls.
+PatternPath is a **free, pattern-based learning platform** built for engineering students who want real understanding, long-term retention, and interview readiness without selling courses, certificates, or locking content behind paywalls.
 
 Instead of focusing on course completion, PatternPath helps learners **master problem-solving patterns**, **track weak areas**, and **revise intelligently over time**.
 
@@ -74,7 +74,7 @@ Users receive reminders to **revise patterns they are likely to forget**, helpin
 
 ---
 
-## Monetization (Ethical & Optional)
+## Monetization
 
 PatternPath does **not sell learning content**.
 
