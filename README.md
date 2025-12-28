@@ -24,7 +24,7 @@ PatternPath is built on a simple belief:
 
 ---
 
-## Core Philosophy (Babua Mindset)
+## Core Philosophy
 
 PatternPath follows a practical, student-first approach:
 
@@ -103,13 +103,12 @@ Students who never pay still get **full access to all learning material**.
 
 ---
 
-## Tech Stack (Prototype)
+## Tech Stack 
 
-- Frontend: Web-based UI
-- Backend: API-driven architecture
-- Database: Pattern, user, and progress tracking
+- Frontend: Tailwind, React, HTML
+- Backend: Java, Springboot
+- Database: MySQL
 
-(The current focus is product clarity and learning flow rather than heavy technical complexity.)
 
 ---
 
@@ -119,12 +118,7 @@ PatternPath aims to help students stop relearning the same concepts again and ag
 
 ---
 
-## Hackathon Note
-
-This project is built as part of a hackathon challenge focused on creating a **free, ethical, and scalable learning platform** aligned with the Babua mindset.
-
----
-
 ## License
 
-This project is open for learning and experimentation.
+This project is licensed under the **MIT License**.  
+You are free to use, modify, and distribute this project with attribution.
