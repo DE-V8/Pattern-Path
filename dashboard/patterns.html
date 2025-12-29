@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PAGE TITLE -->
+    <title>Coding Interview Patterns | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="../index.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath</span>
+        </a>
+        <div class="h-8 w-8 rounded-full border border-secondary p-[1px] bg-white/5">
+             <!-- User Profile Mock -->
+             <div class="w-full h-full rounded-full bg-secondary/20 flex items-center justify-center text-[10px] font-bold">JD</div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-28">
+        
+        <div class="mb-12 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">🧩 Coding Interview Patterns</h1>
+            <p class="text-textSecondary max-w-2xl mx-auto">Master the underlying logic behind solving thousands of LeetCode problems.</p>
+        </div>
+
+        <!-- GRID of PATTERNS -->
+        <!-- RULE: Dashboard contains list of patterns ONLY. No problem tables. -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- 1. ARRAYS & HASHING -->
+            <a href="../patterns/arrays.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Arrays & Hashing</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-secondary border border-secondary-dim group-hover:border-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden">
+                    <div class="h-full bg-primary w-[35%]"></div>
+                </div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted">
+                    <span>8 Easy • 12 Med • 7 Hard</span>
+                    <span>35%</span>
+                </div>
+            </a>
+
+            <!-- 2. TWO POINTERS -->
+            <a href="../patterns/two-pointers.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Two Pointers</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                    </div>
+                </div>
+                <!-- Progress placeholder -->
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden">
+                    <div class="h-full bg-primary w-0"></div>
+                </div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted">
+                    <span>5 Easy • 8 Med • 5 Hard</span>
+                    <span>0%</span>
+                </div>
+            </a>
+
+            <!-- 3. SLIDING WINDOW -->
+            <a href="../patterns/sliding-window.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Sliding Window</h3>
+                     <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>3 Easy • 7 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+            
+            <!-- 4. STACK -->
+            <a href="../patterns/stacks.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Stack</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>4 Easy • 9 Med • 5 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 5. BINARY SEARCH -->
+            <a href="../patterns/binary-search.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                     <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Binary Search</h3>
+                     <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                     </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>4 Easy • 10 Med • 3 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 6. LINKED LIST -->
+            <a href="../patterns/linked-list.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Linked List</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>6 Easy • 8 Med • 4 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 7. TREES (DFS) -->
+            <a href="../patterns/tree-dfs.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Trees (DFS)</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4L4 20h16L12 4z"/></svg> <!-- Placeholder icon -->
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>4 Easy • 8 Med • 3 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 8. TREES (BFS) -->
+            <a href="../patterns/tree-bfs.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Trees (BFS)</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>2 Easy • 6 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 9. GRAPHS -->
+             <a href="../patterns/graphs.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Graphs</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> 
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>3 Easy • 12 Med • 8 Hard</span><span>0%</span></div>
+            </a>
+
+             <!-- 10. DYNAMIC PROGRAMMING -->
+             <a href="../patterns/dynamic-programming.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Dyn. Programming</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>5 Easy • 15 Med • 10 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 11. HEAPS / PQ -->
+            <a href="../patterns/heaps.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Heaps / P.Q.</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>2 Easy • 9 Med • 4 Hard</span><span>0%</span></div>
+            </a>
+            
+            <!-- 12. BACKTRACKING -->
+            <a href="../patterns/backtracking.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                 <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Backtracking</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>1 Easy • 8 Med • 3 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 13. TRIE -->
+            <a href="../patterns/trie.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Trie</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>0 Easy • 5 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 14. BIT MANIPULATION -->
+            <a href="../patterns/bitwise.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Bit Manipulation</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>4 Easy • 6 Med • 3 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 15. INTERVALS -->
+            <a href="../patterns/intervals.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                 <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Intervals</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>2 Easy • 5 Med • 1 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 16. GREEDY -->
+            <a href="../patterns/greedy.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Greedy</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                </div>
+                <!-- Progress placeholder -->
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>3 Easy • 12 Med • 4 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 17. MATH & GEOMETRY -->
+            <a href="../patterns/math-geometry.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Math & Geometry</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>5 Easy • 7 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 18. FAST & SLOW POINTERS -->
+            <a href="../patterns/fast-slow.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Fast & Slow Pointers</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>1 Easy • 4 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 19. K-WAY MERGE -->
+            <a href="../patterns/k-way-merge.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">K-Way Merge</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>0 Easy • 4 Med • 3 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 20. TOP K ELEMENTS -->
+            <a href="../patterns/top-k.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Top K Elements</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>1 Easy • 6 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 21. CYCLIC SORT -->
+            <a href="../patterns/cyclic-sort.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Cyclic Sort</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>1 Easy • 4 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 22. TOPOLOGICAL SORT -->
+            <a href="../patterns/topological-sort.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Topological Sort</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>0 Easy • 5 Med • 3 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 23. SORTING & SEARCHING -->
+            <a href="../patterns/sort-search.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Sorting & Search</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>5 Easy • 5 Med • 0 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 24. MATRICES -->
+            <a href="../patterns/matrices.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Matrices</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>3 Easy • 8 Med • 3 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 25. HASH MAPS -->
+            <a href="../patterns/hashmap.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Hash Maps</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>5 Easy • 10 Med • 5 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 26. FREQUENCY TRACKING -->
+            <a href="../patterns/frequency-tracking.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Freq. Tracking</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>2 Easy • 4 Med • 1 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 27. UNION FIND -->
+            <a href="../patterns/union-find.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Union Find</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>0 Easy • 6 Med • 4 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 28. CUSTOM DATA STRUCTURES -->
+            <a href="../patterns/custom-ds.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Custom DS</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>1 Easy • 3 Med • 2 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 29. SEGMENT TREE -->
+            <a href="../patterns/segment-tree.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Segment Tree</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>0 Easy • 2 Med • 5 Hard</span><span>0%</span></div>
+            </a>
+
+            <!-- 30. EXTRA PROBLEMS -->
+            <a href="../patterns/extra-problems.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Extra Problems</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>10 Easy • 10 Med • 10 Hard</span><span>0%</span></div>
+            </a>
+
+        </div>
+
+        <div class="mt-12 text-center text-textMuted text-sm">
+            <p>Access full list of 30 patterns in the premium dashboard.</p>
+        </div>
+
+    </main>
+</body>
+</html>
