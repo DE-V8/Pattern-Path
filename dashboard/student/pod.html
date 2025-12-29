@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pod Outcomes | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="index.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath <span class="text-secondary text-xs align-top ml-1">Student</span></span>
+        </a>
+        <div class="text-xs text-textMuted">
+            Credits: <span id="header-credits" class="text-secondary font-bold">0</span>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-4xl mx-auto px-6 pt-28">
+        
+        <!-- BREADCRUMB -->
+        <div class="mb-8">
+            <a href="index.html" class="text-xs text-textSecondary hover:text-white transition-colors">&larr; Back to Dashboard</a>
+        </div>
+
+        <!-- POD HEADER -->
+        <div class="flex justify-between items-start mb-12">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">Sliding Window Sprint</h1>
+                <p class="text-textSecondary">Submit your outcomes for mentor review.</p>
+            </div>
+            <div class="text-right hidden sm:block">
+                <div class="text-xs text-textMuted uppercase tracking-wider">Mentor</div>
+                <div class="font-bold text-secondary">Rohit (Amazon)</div>
+            </div>
+        </div>
+
+        <!-- ERROR MESSAGE (Dynamic) -->
+        <div id="error-msg" class="hidden mb-6 p-4 bg-red-500/10 border border-red-500/50 rounded-lg text-red-500 text-sm font-bold">
+            No credits remaining! Cannot submit.
+        </div>
+
+        <!-- OUTCOMES LIST -->
+        <div class="space-y-4" id="outcomes-container">
+            <!-- Injected via JS -->
+        </div>
+
+    </main>
+
+    <!-- LOGIC -->
+    <script>
+        // 1. STATE INITIALIZATION
+        let credits = parseInt(localStorage.getItem('credits') || '0');
+        document.getElementById('header-credits').textContent = credits;
+
+        const defaultOutcomes = [
+            { id: 1, title: 'Understand Sliding Window Pattern', status: 'Pending' },
+            { id: 2, title: 'Solve 3 Medium Problems', status: 'Pending' },
+            { id: 3, title: 'Revise Common Pitfalls', status: 'Pending' }
+        ];
+
+        let outcomes = JSON.parse(localStorage.getItem('pod_outcomes'));
+        if (!outcomes || outcomes.length === 0) {
+            outcomes = defaultOutcomes;
+            localStorage.setItem('pod_outcomes', JSON.stringify(outcomes));
+        }
+
+        // 2. RENDER FUNCTION
+        function render() {
+            const container = document.getElementById('outcomes-container');
+            container.innerHTML = '';
+
+            outcomes.forEach(item => {
+                // Determine visuals based on status
+                let statusColor = 'text-textMuted'; // Pending
+                let btnState = '';
+                let btnText = 'Submit for Review';
+                let btnClass = 'bg-white/5 hover:bg-white/10 text-textPrimary border-secondary-dim';
+
+                if (item.status === 'Submitted') {
+                    statusColor = 'text-blue-400';
+                    btnState = 'disabled';
+                    btnText = 'Under Review';
+                    btnClass = 'bg-blue-500/10 text-blue-400 border-blue-500/30 cursor-not-allowed';
+                } else if (item.status === 'Approved') {
+                    statusColor = 'text-green-500';
+                    btnState = 'disabled';
+                    btnText = 'Approved ✅';
+                    btnClass = 'bg-green-500/10 text-green-500 border-green-500/30 cursor-not-allowed';
+                }
+
+                const html = `
+                <div class="glass-panel p-6 rounded-xl border border-secondary-dim flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all duration-300">
+                    <div>
+                        <h3 class="font-bold text-textPrimary text-lg">${item.title}</h3>
+                        <div class="text-xs mt-1 flex items-center gap-2">
+                            <span class="text-textMuted">Status:</span>
+                            <span class="font-bold uppercase tracking-wider ${statusColor}">${item.status}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button 
+                            onclick="submitOutcome(${item.id})" 
+                            class="w-full sm:w-auto px-6 py-2.5 rounded-lg border text-sm font-bold transition-all ${btnClass}"
+                            ${btnState}
+                        >
+                            ${btnText}
+                        </button>
+                    </div>
+                </div>
+                `;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        // 3. ACTION: SUBMIT
+        window.submitOutcome = function(id) {
+            // Check credits
+            if (credits <= 0) {
+                document.getElementById('error-msg').classList.remove('hidden');
+                return;
+            }
+
+            // Deduct Logic
+            credits--;
+            localStorage.setItem('credits', credits.toString());
+            document.getElementById('header-credits').textContent = credits;
+
+            // Update Outcome
+            const idx = outcomes.findIndex(o => o.id === id);
+            if (idx !== -1) {
+                outcomes[idx].status = 'Submitted';
+                localStorage.setItem('pod_outcomes', JSON.stringify(outcomes));
+                render();
+            }
+        };
+
+        // Initial Render
+        render();
+
+    </script>
+</body>
+</html>

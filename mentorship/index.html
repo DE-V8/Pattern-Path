@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorship | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen flex items-center justify-center">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <div class="relative z-10 text-center p-8 max-w-lg mx-auto">
+        <h1 class="text-4xl font-bold mb-6 text-primary">Mentorship</h1>
+        <div class="glass-panel p-8 rounded-xl border border-secondary-dim bg-white/[0.02]">
+            <p class="text-lg text-textSecondary mb-8">
+                Direct mentor chat and outcome validation coming here.
+            </p>
+            <a href="../dashboard/categories.html" class="inline-block px-6 py-3 rounded-lg border border-secondary text-secondary hover:bg-secondary hover:text-white transition-all font-bold">
+                Go back to Categories
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="../../index.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath <span class="text-secondary text-xs align-top ml-1">Student</span></span>
+        </a>
+        <div class="flex items-center gap-4">
+             <div class="text-xs text-right hidden sm:block">
+                 <div class="text-textPrimary font-bold">Student Account</div>
+                 <div class="text-textMuted">Balance: <span id="header-credits" class="text-secondary">0</span> Credits</div>
+             </div>
+             <div class="h-8 w-8 rounded-full border border-secondary p-[1px] bg-white/5">
+                 <div class="w-full h-full rounded-full bg-secondary/20 flex items-center justify-center text-[10px] font-bold">ST</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-5xl mx-auto px-6 pt-28">
+        
+        <!-- WELCOME SECTION -->
+        <div class="mb-12">
+            <h1 class="text-3xl font-bold mb-2">My Mentorship Pods</h1>
+            <p class="text-textSecondary">Manage your active learning sprints and outcome submissions.</p>
+        </div>
+
+        <!-- STATS CARD: CREDITS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="glass-panel p-6 rounded-xl border border-secondary-dim bg-white/[0.02]">
+                <div class="text-sm text-textMuted uppercase tracking-wider font-bold mb-2">Mentorship Credits</div>
+                <div class="flex items-baseline gap-2">
+                    <span id="display-credits" class="text-4xl font-bold text-white">0</span>
+                    <span class="text-sm text-textSecondary">remaining</span>
+                </div>
+                <div class="mt-4 text-xs text-textMuted">
+                    Use credits to submit outcomes for mentor review.
+                </div>
+            </div>
+        </div>
+
+        <!-- PODS GRID -->
+        <h2 class="text-xl font-bold mb-6 text-textPrimary">Active Pods</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- DEMO POD CARD -->
+            <div class="glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 group">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded mb-2 inline-block">Active Sprint</span>
+                        <h3 class="text-lg font-bold text-textPrimary mt-1">Sliding Window – 7 Day Sprint</h3>
+                        <p class="text-xs text-textMuted mt-1">Mentor: <span class="text-textSecondary">Rohit (Amazon)</span></p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-secondary-dim text-secondary">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                </div>
+                
+                <!-- PROGRESS -->
+                <div class="mb-6">
+                    <div class="flex justify-between text-xs mb-2">
+                        <span class="text-textSecondary">Sprint Progress</span>
+                        <span id="pod-progress-text" class="text-white font-bold">0 / 3 Outcomes</span>
+                    </div>
+                    <div class="w-full h-1.5 bg-[#1a1a1a] rounded-full overflow-hidden">
+                        <div id="pod-progress-bar" class="h-full bg-secondary w-0 transition-all duration-500"></div>
+                    </div>
+                </div>
+
+                <a href="pod.html" class="block w-full text-center bg-white/5 hover:bg-white/10 border border-secondary-dim hover:border-secondary text-textPrimary font-bold py-2.5 rounded-lg transition-all text-sm">
+                    Enter Pod &rarr;
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- LOGIC -->
+    <script>
+        // 1. Initialize Credits
+        let credits = localStorage.getItem('credits');
+        if (credits === null) {
+            credits = 3;
+            localStorage.setItem('credits', credits);
+        }
+        
+        // 2. Update UI
+        document.getElementById('display-credits').textContent = credits;
+        document.getElementById('header-credits').textContent = credits;
+
+        // 3. Calculate Progress (Optional but nice)
+        // We'll peek at the outcomes to see how many are approved/submitted if we implement that part strictly
+        // For now, let's keep it simple or read from localStorage if outcomes existed
+        const outcomesStr = localStorage.getItem('pod_outcomes');
+        let completed = 0;
+        if (outcomesStr) {
+            const outcomes = JSON.parse(outcomesStr);
+            outcomes.forEach(o => {
+                if (o.status === 'Approved') completed++;
+            });
+        }
+        
+        // Update progress bar
+        const total = 3; // Fixed for demo
+        const pct = (completed / total) * 100;
+        document.getElementById('pod-progress-text').textContent = `${completed} / ${total} Outcomes`;
+        document.getElementById('pod-progress-bar').style.width = `${pct}%`;
+
+    </script>
+</body>
+</html>

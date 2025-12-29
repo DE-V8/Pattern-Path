@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentor Dashboard | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="../../index.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath <span class="align-top text-primary text-xs ml-1">Mentor</span></span>
+        </a>
+        <div class="flex items-center gap-4">
+             <div class="text-xs text-right hidden sm:block">
+                 <div class="text-textPrimary font-bold">Mentor Account</div>
+                 <div class="text-textMuted">Earned: <span id="header-tokens" class="text-primary">0</span> Tokens</div>
+             </div>
+             <div class="h-8 w-8 rounded-full border border-primary p-[1px] bg-white/5">
+                 <div class="w-full h-full rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">MR</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-5xl mx-auto px-6 pt-28">
+        
+        <!-- WELCOME SECTION -->
+        <div class="mb-12">
+            <h1 class="text-3xl font-bold mb-2">Mentor Overview</h1>
+            <p class="text-textSecondary">Review student submissions and earn outcome tokens.</p>
+        </div>
+
+        <!-- STATS CARD: TOKENS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="glass-panel p-6 rounded-xl border border-secondary-dim bg-white/[0.02]">
+                <div class="text-sm text-textMuted uppercase tracking-wider font-bold mb-2">Outcome Tokens Earned</div>
+                <div class="flex items-baseline gap-2">
+                    <span id="display-tokens" class="text-4xl font-bold text-primary">0</span>
+                    <span class="text-sm text-textSecondary">tokens</span>
+                </div>
+                <!-- Mini visualization of earnings -->
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden mt-4">
+                    <div class="h-full bg-primary w-[10%]"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PODS LIST -->
+        <h2 class="text-xl font-bold mb-6 text-textPrimary">Assigned Pods</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- DEMO POD CARD -->
+            <div class="glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 group">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <span class="text-xs font-bold text-secondary bg-secondary/10 px-2 py-1 rounded mb-2 inline-block">Active Sprint</span>
+                        <h3 class="text-lg font-bold text-textPrimary mt-1">Sliding Window – 7 Day Sprint</h3>
+                        <p class="text-xs text-textMuted mt-1">Cohort: <span class="text-textSecondary">Dec 2025</span></p>
+                    </div>
+                </div>
+                
+                <!-- PENDING NOTIFICATION -->
+                <div class="mb-6 flex items-center gap-2">
+                    <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+                    <span class="text-xs text-textSecondary">New submissions pending review</span>
+                </div>
+
+                <a href="review.html" class="block w-full text-center bg-primary hover:bg-primary-hover text-white font-bold py-2.5 rounded-lg transition-all text-sm shadow-[0_0_15px_rgba(173,0,19,0.2)]">
+                    Review Outcomes &rarr;
+                </a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- LOGIC -->
+    <script>
+        // 1. Initialize Tokens
+        let tokens = localStorage.getItem('mentorTokens');
+        if (tokens === null) {
+            tokens = 0;
+            localStorage.setItem('mentorTokens', tokens);
+        }
+        
+        // 2. Update UI
+        document.getElementById('display-tokens').textContent = tokens;
+        document.getElementById('header-tokens').textContent = tokens;
+    </script>
+</body>
+</html>

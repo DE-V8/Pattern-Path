@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Path | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen flex items-center justify-center pb-20 relative overflow-hidden">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="relative z-10 w-full max-w-5xl px-6">
+        
+        <!-- HEADER SECTION -->
+        <div class="text-center mb-16">
+            <span class="text-xs uppercase tracking-[0.2em] text-secondary font-bold mb-4 block animate-pulse">Learning Paths</span>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white tracking-tight">Choose Your Path</h1>
+            <p class="text-textSecondary max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                Learn freely, or work with mentors for accountability and validation.
+            </p>
+            <!-- DIVIDER -->
+            <div class="h-px w-24 bg-gradient-to-r from-transparent via-secondary-dim to-transparent mx-auto mt-10"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            
+            <!-- CARD 1: DSA SHEETS -->
+            <a href="patterns.html" class="group glass-panel p-10 rounded-2xl border border-secondary-dim hover:border-secondary transition-all duration-500 hover:bg-white/[0.03] block relative overflow-hidden transform hover:-translate-y-1">
+                <div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <div class="relative z-10">
+                    <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-secondary border border-secondary-dim group-hover:border-secondary group-hover:text-white transition-colors mb-8 shadow-lg">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                    
+                    <h2 class="text-2xl font-bold text-textPrimary group-hover:text-secondary transition-colors mb-2">DSA Sheets</h2>
+                    <p class="text-sm text-textMuted mb-6 italic">Self-Paced Learning</p>
+                    
+                    <ul class="space-y-3 text-sm text-textSecondary">
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary/50"></span>
+                            Structured LeetCode Patterns
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary/50"></span>
+                            Master 15+ Core Concepts
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-secondary/50"></span>
+                            Completely Free Access
+                        </li>
+                    </ul>
+                </div>
+            </a>
+
+            <!-- CARD 2: MENTORSHIP -->
+            <a href="../mentorship/chat.html" class="group glass-panel p-10 rounded-2xl border border-primary/30 hover:border-primary transition-all duration-500 hover:bg-white/[0.03] block relative overflow-hidden transform hover:-translate-y-1 ring-1 ring-primary/10 hover:ring-primary/40">
+                <!-- Recommended Badge -->
+                <div class="absolute top-0 right-0 bg-primary/20 text-primary text-[10px] font-bold px-3 py-1.5 rounded-bl-xl border-l border-b border-primary/20 uppercase tracking-wider backdrop-blur-md">
+                    Recommended
+                </div>
+                
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                <div class="relative z-10">
+                    <div class="w-14 h-14 rounded-xl bg-white/5 flex items-center justify-center text-primary border border-secondary-dim group-hover:border-primary group-hover:text-white transition-colors mb-8 shadow-lg">
+                        <svg class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-textPrimary group-hover:text-primary transition-colors mb-2">Mentorship</h2>
+                    <p class="text-sm text-textMuted mb-6 italic">Accelerated Growth</p>
+
+                    <ul class="space-y-3 text-sm text-textSecondary">
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
+                            Direct Mentor Chat (Terminal)
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
+                            Get Resume & Code Reviews
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="w-1.5 h-1.5 rounded-full bg-primary/50"></span>
+                            Earn Verified Outcome Tokens
+                        </li>
+                    </ul>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div class="text-center mt-12">
+            <p class="text-xs text-textMuted/50 uppercase tracking-widest font-medium group cursor-default">
+                You can switch paths anytime
+                <span class="inline-block w-1 h-1 rounded-full bg-secondary/50 ml-2 group-hover:bg-primary transition-colors"></span>
+            </p>
+        </div>
+
+    </main>
+
+</body>
+</html>
