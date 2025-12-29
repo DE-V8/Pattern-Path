@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentorship Terminal | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Cursor Blink Animation */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        /* Hide scrollbar for clean terminal look */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20 overflow-hidden flex flex-col items-center">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="../index.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath</span>
+        </a>
+        <nav class="flex items-center gap-6 text-sm font-medium">
+            <a href="../dashboard/categories.html" class="text-textSecondary hover:text-white transition-colors">Categories</a>
+            <a href="../dashboard/patterns.html" class="text-textSecondary hover:text-white transition-colors">DSA Sheets</a>
+            <a href="#" class="text-primary font-bold">Mentorship</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="relative z-10 w-full max-w-4xl h-screen flex flex-col p-6 pt-24">
+        
+        <!-- HEADER -->
+        <div class="flex justify-between items-end mb-6 shrink-0">
+            <div>
+
+                <h1 class="text-2xl font-bold">Mentorship Terminal</h1>
+                <p class="text-xs text-textMuted mt-1">Ask questions. Spend credits. Get reviewed.</p>
+            </div>
+            <div class="text-right">
+                <div class="text-xs text-textSecondary uppercase tracking-wider">Credits remaining</div>
+                <div class="text-xl font-bold text-secondary" id="credit-display">--</div>
+            </div>
+        </div>
+
+        <!-- TERMINAL WINDOW -->
+        <div class="glass-panel border border-secondary-dim rounded-lg flex-1 flex flex-col overflow-hidden relative shadow-2xl bg-[#0a0a0a]/80 backdrop-blur-xl">
+            
+            <!-- Terminal Title Bar -->
+            <div class="bg-white/5 border-b border-secondary-dim px-4 py-2 flex items-center justify-between shrink-0">
+                <div class="flex gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
+                </div>
+                <div class="text-[10px] text-textMuted tracking-widest uppercase">mentor@patternpath:~</div>
+                <div class="w-10"></div> <!-- spacer -->
+            </div>
+
+            <!-- Chat Area -->
+            <div id="chat-log" class="flex-1 p-4 overflow-y-auto no-scrollbar font-mono text-sm space-y-3">
+                <!-- Messages will appear here -->
+                <div class="opacity-50 text-textMuted italic text-xs mb-4"># Session started. 1 Credit per message.</div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="border-t border-secondary-dim p-4 bg-black/20 shrink-0">
+                 <form id="chat-form" class="flex gap-2 items-center" onsubmit="event.preventDefault(); sendMessage();">
+                    <span class="text-secondary text-sm font-bold whitespace-nowrap">student@you:~$</span>
+                    <input type="text" id="chat-input" 
+                        class="bg-transparent border-none outline-none text-textPrimary w-full font-mono text-sm placeholder:text-textMuted/30"
+                        placeholder="Type your question here..." autocomplete="off">
+                    <div class="w-2 h-4 bg-secondary cursor-blink"></div>
+                </form>
+                <div id="error-msg" class="text-red-500 text-xs mt-2 hidden font-bold">> Error: Insufficient credits.</div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- LOGIC -->
+    <script>
+        // 1. STATE
+        let credits = parseInt(localStorage.getItem('credits'));
+        // If simulated backend didn't set it (direct access), default to 3
+        if (isNaN(credits)) {
+            credits = 3;
+            localStorage.setItem('credits', '3');
+        }
+
+        const creditDisplay = document.getElementById('credit-display');
+        const chatLog = document.getElementById('chat-log');
+        const chatInput = document.getElementById('chat-input');
+        const chatForm = document.getElementById('chat-form');
+        const errorMsg = document.getElementById('error-msg');
+
+        // Update UI
+        function updateUI() {
+            creditDisplay.textContent = credits;
+            if (credits <= 0) {
+                chatInput.disabled = true;
+                chatInput.placeholder = "No credits remaining.";
+                errorMsg.classList.remove('hidden');
+                // Remove blinking cursor visual
+                document.querySelector('.cursor-blink').classList.add('hidden');
+            }
+        }
+        updateUI();
+
+        // 2. APPEND MESSAGE
+        function appendMessage(sender, text, isSystem = false) {
+            const div = document.createElement('div');
+            
+            // Styles
+            const senderClass = sender.includes('mentor') ? 'text-primary' : (sender.includes('student') ? 'text-secondary' : 'text-textMuted');
+            const opacityClass = sender.includes('mentor') ? 'opacity-90' : 'opacity-100';
+            
+            div.innerHTML = `<span class="${senderClass} font-bold mr-2">${sender}:~$</span><span class="${opacityClass}">${text}</span>`;
+            chatLog.appendChild(div);
+            
+            // Auto scroll
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // 3. SEND LOGIC
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            if (credits <= 0) return;
+
+            // Student Message
+            appendMessage('student@you', text);
+            chatInput.value = '';
+
+            // Consume Credit
+            credits--;
+            localStorage.setItem('credits', credits.toString());
+            updateUI();
+
+            // Fake Mentor Response
+            setTimeout(() => {
+                const responses = [
+                    "Noted. Review your window conditions.",
+                    "Check the edge case where k=0.",
+                    "Have you considered using a hash map here?",
+                    "That looks correct. Proceed to implementation.",
+                    "Review the time complexity constraints."
+                ];
+                const randomResp = responses[Math.floor(Math.random() * responses.length)];
+                
+                appendMessage('mentor@rohit', randomResp);
+            }, 1000 + Math.random() * 2000); // Random delay 1-3s
+        }
+
+        // Focus input on load
+        if (credits > 0) {
+            chatInput.focus();
+        }
+
+    </script>
+</body>
+</html>
