@@ -16,6 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (value < 0) value = 0; // Prevent negative
         localStorage.setItem(STORAGE_KEY, value);
         updateCreditsUI();
+        
+        // SYNC: Push to Supabase
+        (async () => {
+            try {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser && currentUser.loggedIn && window.Sync) {
+                    await window.Sync.syncCredits(currentUser.email, value);
+                }
+            } catch (e) {
+                console.warn('Credits Sync Warning:', e);
+            }
+        })();
     }
     
     // 2. UI Update
@@ -30,11 +42,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Expose globally for other scripts (progress.js)
+    window.updateCreditsUI = updateCreditsUI;
+
     // 3. Initialization
     // Ensure default exists
     if (localStorage.getItem(STORAGE_KEY) === null) {
         setCredits(DEFAULT_CREDITS);
     }
+    
+    // Sync Check: If logged in, fetch remote credits just in case (e.g. new device)
+    (async () => {
+        try {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser && currentUser.loggedIn) {
+                
+                if (!window.Sync) {
+                    // console.warn('Credits: Sync module not loaded.'); 
+                    // Silent return to avoid log noise if offline or script order issue
+                    return; 
+                }
+
+                const remoteCredits = await window.Sync.fetchCredits(currentUser.email);
+                
+                if (remoteCredits !== null) {
+                    console.log('Credits: Synced from remote:', remoteCredits);
+                    // Update local if different
+                    localStorage.setItem(STORAGE_KEY, remoteCredits);
+                    updateCreditsUI();
+                }
+            }
+        } catch (e) {
+            console.warn('Credits: Remote fetch failed', e);
+        }
+    })();
     
     // Initial UI render
     updateCreditsUI();

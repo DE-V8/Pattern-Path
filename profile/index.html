@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | PatternPath</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../assets/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20">
+
+    <!-- BG PATTERN -->
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <!-- HEADER -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="../dashboard/categories.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath <span class="text-xs text-textMuted ml-2">Back to Dashboard</span></span>
+        </a>
+        <nav class="flex items-center gap-6 text-sm font-medium">
+            <span class="text-primary font-bold">Profile</span>
+            <!-- LOGOUT -->
+            <button onclick="Auth.logout()" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
+                Logout
+            </button>
+        </nav>
+    </header>
+
+    <main class="relative z-10 max-w-4xl mx-auto px-6 pt-28">
+        
+        <div class="mb-10 flex items-end justify-between">
+            <div>
+                <h1 class="text-3xl font-bold mb-2">My Profile</h1>
+                <p class="text-textSecondary">Your learning journey and account details.</p>
+            </div>
+            <!-- SYNC STATUS INDICATOR -->
+            <div id="sync-status" class="text-xs font-bold px-3 py-1 rounded-full bg-green-900/20 text-green-500 border border-green-500/20 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                Online & Synced
+            </div>
+        </div>
+
+        <!-- GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- PROFILE CARD -->
+            <div class="p-6 rounded-xl border border-secondary-dim bg-white/[0.02] backdrop-blur-sm">
+                <div class="text-xs font-bold text-primary uppercase tracking-wider mb-4">Account Info</div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <div class="text-xs text-textMuted mb-1">Email Address</div>
+                        <div id="profile-email" class="text-lg font-medium text-white">loading...</div>
+                    </div>
+                    <div>
+                         <div class="text-xs text-textMuted mb-1">Member Since</div>
+                         <div id="profile-joined" class="text-sm text-textSecondary">loading...</div>
+                    </div>
+                     <div>
+                         <div class="text-xs text-textMuted mb-1">Last Login</div>
+                         <div id="profile-login" class="text-sm text-textSecondary">loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- STATS CARD -->
+            <div class="p-6 rounded-xl border border-secondary-dim bg-white/[0.02] backdrop-blur-sm">
+                <div class="text-xs font-bold text-secondary uppercase tracking-wider mb-4">Learning Stats</div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Total Problems -->
+                    <div class="p-4 rounded-lg bg-black/20 border border-white/5">
+                        <div class="text-2xl font-bold text-white mb-1" id="stats-solved">0</div>
+                        <div class="text-xs text-textMuted">Problems Solved</div>
+                    </div>
+                    <!-- Lessons Started -->
+                    <div class="p-4 rounded-lg bg-black/20 border border-white/5">
+                        <div class="text-2xl font-bold text-white mb-1" id="stats-lessons">0</div>
+                        <div class="text-xs text-textMuted">Lessons Started</div>
+                    </div>
+                    <!-- Credits -->
+                    <div class="p-4 rounded-lg bg-black/20 border border-white/5">
+                        <div class="text-2xl font-bold text-secondary mb-1" id="stats-credits">0</div>
+                        <div class="text-xs text-textMuted">Available Credits</div>
+                    </div>
+                     <!-- Completion -->
+                     <div class="p-4 rounded-lg bg-black/20 border border-white/5">
+                        <div class="text-2xl font-bold text-primary mb-1" id="stats-completion">0%</div>
+                        <div class="text-xs text-textMuted">Global Completion</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- LOGIC -->
+    <!-- 1. Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- 2. Supabase Init (Global) -->
+    <script src="../assets/init-supabase.js"></script>
+    
+    <!-- 3. Sync Helper (Global) -->
+    <script src="../assets/supabase-client.js"></script>
+
+    <script src="../assets/auth.js"></script>
+    <script src="../assets/credits.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Enforce Login
+            Auth.requireLogin();
+
+            // 2. Load User Data (Offline First)
+            const currentUser = Auth.getCurrentUser();
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+            const fullUser = users[currentUser.email]; // Get full details (createdAt etc)
+
+            if (fullUser) {
+                document.getElementById('profile-email').textContent = fullUser.email;
+                document.getElementById('profile-joined').textContent = new Date(fullUser.createdAt).toLocaleDateString();
+                document.getElementById('profile-login').textContent = new Date(fullUser.lastLoginAt).toLocaleString();
+            }
+
+            // 3. Load Stats (localStorage source of truth)
+            const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
+            let totalSolved = 0;
+            let lessonsStarted = 0;
+            
+            Object.values(progress).forEach(p => {
+                if (p.completed && p.completed.length > 0) {
+                    totalSolved += p.completed.length;
+                    lessonsStarted++;
+                }
+            });
+
+            // Assuming ~30 patterns * ~5 problems = 150 total (rough estimate for demo)
+            const ESTIMATED_TOTAL_PROBLEMS = 150; 
+            const completionRate = Math.round((totalSolved / ESTIMATED_TOTAL_PROBLEMS) * 100);
+
+            document.getElementById('stats-solved').textContent = totalSolved;
+            document.getElementById('stats-lessons').textContent = lessonsStarted;
+            document.getElementById('stats-completion').textContent = `${completionRate}%`;
+            
+            // Credits (handled by credits.js init but we can read direct for instant render)
+            const credits = localStorage.getItem('userCredits') || '0';
+            document.getElementById('stats-credits').textContent = credits;
+
+            // 4. Sync Status Check
+            if (!navigator.onLine) {
+                const status = document.getElementById('sync-status');
+                status.className = "text-xs font-bold px-3 py-1 rounded-full bg-red-900/20 text-red-500 border border-red-500/20 flex items-center gap-2";
+                status.innerHTML = `<span class="w-2 h-2 rounded-full bg-red-500"></span> Offline Mode`;
+            } else {
+                 // Try a quick ping or check sync module
+                 try {
+                     const module = await import('../assets/supabase-client.js');
+                     if (!module.Sync.isOnline()) {
+                        throw new Error('Offline');
+                     }
+                 } catch(e) {
+                    const status = document.getElementById('sync-status');
+                    status.className = "text-xs font-bold px-3 py-1 rounded-full bg-yellow-900/20 text-yellow-500 border border-yellow-500/20 flex items-center gap-2";
+                    status.innerHTML = `<span class="w-2 h-2 rounded-full bg-yellow-500"></span> Sync Warning`;
+                 }
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -51,11 +51,16 @@
         <nav class="flex items-center gap-6 text-sm font-medium">
             <a href="patterns.html" class="text-primary font-bold">DSA Sheets</a>
             <a href="../mentorship/chat.html" class="text-textSecondary hover:text-white transition-colors">Mentorship</a>
+            <a href="../profile/index.html" class="text-textSecondary hover:text-white transition-colors">Profile</a>
             <!-- GLOBAL CREDITS -->
             <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-secondary/30 bg-white/5 backdrop-blur-sm shadow-sm hover:border-secondary/50 transition-all ml-2">
                 <span class="text-xs font-medium text-textMuted uppercase tracking-wider">Credits</span>
                 <span class="text-sm font-bold text-secondary credits-display-value">...</span>
             </div>
+            <!-- LOGOUT -->
+            <button onclick="Auth.logout()" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
+                Logout
+            </button>
         </nav>
     </header>
 
@@ -450,6 +455,18 @@
 
     </main>
     <script src="../assets/dashboard-progress.js"></script>
+    <script src="../assets/dashboard-progress.js"></script>
+    <!-- 1. Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- 2. Supabase Init (Global) -->
+    <script src="../assets/init-supabase.js"></script>
+    
+    <!-- 3. Sync Helper (Global) -->
+    <script src="../assets/supabase-client.js"></script>
+
     <script src="../assets/credits.js"></script>
+    <script src="../assets/auth.js"></script>
+    <script>Auth.requireLogin();</script>
 </body>
 </html>

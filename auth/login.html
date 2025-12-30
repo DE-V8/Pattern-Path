@@ -105,10 +105,15 @@
             </div>
 
             <!-- LOGIN FORM -->
-            <form class="space-y-6" action="#" onsubmit="event.preventDefault(); window.location.href='../dashboard/categories.html';">
+            <!-- LOGIN FORM -->
+            <!-- 
+              DEMO AUTHENTICATION:
+              - Uses localStorage via auth.js
+              - No backend required for prototype
+            -->
+            <form class="space-y-6" onsubmit="event.preventDefault();">
                 
                 <!-- EMAIL INPUT -->
-                <!-- INPUT BORDER RADIUS: rounded-lg -->
                 <div class="space-y-2">
                     <label for="email" class="text-xs font-semibold text-textMuted uppercase tracking-wider">Email Address</label>
                     <div class="relative">
@@ -118,11 +123,28 @@
                     </div>
                 </div>
 
-                <!-- PRIMARY CTA BUTTON -->
-                <!-- ACCENT COLOR: bg-primary -->
-                <button type="submit" class="w-full bg-primary hover:bg-primary-hover text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(173,0,19,0.3)] hover:shadow-[0_0_25px_rgba(173,0,19,0.5)] transform hover:-translate-y-0.5 mt-2">
-                    Continue with Email
-                </button>
+                <!-- PASSWORD INPUT -->
+                <div class="space-y-2">
+                    <label for="password" class="text-xs font-semibold text-textMuted uppercase tracking-wider">Password</label>
+                    <div class="relative">
+                        <input type="password" id="password" name="password" 
+                            class="w-full bg-[#0a0a0a]/50 border border-secondary-dim text-textPrimary text-sm rounded-lg px-4 py-3 outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-all placeholder:text-textMuted/50"
+                            placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="space-y-3 pt-2">
+                    <!-- LOGIN BUTTON -->
+                    <button type="button" id="loginBtn" class="w-full bg-primary hover:bg-primary-hover text-white font-bold py-3 px-4 rounded-lg transition-all duration-300 shadow-[0_0_15px_rgba(173,0,19,0.3)] hover:shadow-[0_0_25px_rgba(173,0,19,0.5)] transform hover:-translate-y-0.5">
+                        Login
+                    </button>
+                    
+                    <!-- REGISTER BUTTON -->
+                    <button type="button" id="registerBtn" class="w-full bg-secondary/10 hover:bg-secondary/20 text-secondary border border-secondary/50 font-bold py-3 px-4 rounded-lg transition-all duration-300">
+                        Register New Account
+                    </button>
+                </div>
 
             </form>
 
@@ -142,5 +164,29 @@
 
     <!-- SCRIPTS -->
     <script src="../assets/script.js"></script>
+    <!-- 1. Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- 2. Supabase Init (Global) -->
+    <script src="../assets/init-supabase.js"></script>
+    
+    <!-- 3. Sync Helper (Global) -->
+    <script src="../assets/supabase-client.js"></script>
+
+    <script src="../assets/auth.js"></script>
+    <script>
+        // Attach Event Listeners for Auth
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            Auth.login(email, password);
+        });
+
+        document.getElementById('registerBtn').addEventListener('click', () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            Auth.register(email, password);
+        });
+    </script>
 </body>
 </html>
