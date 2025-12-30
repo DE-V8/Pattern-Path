@@ -33,6 +33,22 @@
     </script>
 </head>
 <body class="bg-background text-textPrimary font-mono antialiased min-h-screen flex items-center justify-center pb-20 relative overflow-hidden">
+    <!-- TOP RIGHT CONTROLS -->
+    <div class="absolute top-6 right-6 z-50 flex items-center gap-4">
+        <!-- PROFILE LINK -->
+        <a href="../profile/index.html" class="text-xs font-bold text-textMuted hover:text-white uppercase tracking-wider transition-colors mr-2">
+            Profile
+        </a>
+        <!-- GLOBAL CREDITS -->
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-secondary/30 bg-white/5 backdrop-blur-sm shadow-sm hover:border-secondary/50 transition-all">
+            <span class="text-xs font-medium text-textMuted uppercase tracking-wider">Credits</span>
+            <span class="text-sm font-bold text-secondary credits-display-value">...</span>
+        </div>
+        <!-- LOGOUT BUTTON -->
+        <button onclick="Auth.logout()" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full">
+            Logout
+        </button>
+    </div>
 
     <!-- BG PATTERN -->
     <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
@@ -127,6 +143,20 @@
         </div>
 
     </main>
+    <!-- 1. Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- 2. Supabase Init (Global) -->
+    <script src="../assets/init-supabase.js"></script>
+    
+    <!-- 3. Sync Helper (Global) -->
+    <script src="../assets/supabase-client.js"></script>
+
+    <script src="../assets/credits.js"></script>
+    <script src="../assets/auth.js"></script>
+    <script>
+        Auth.requireLogin();
+    </script>
 
 </body>
 </html>
