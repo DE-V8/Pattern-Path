@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays | PatternPath</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/styles.css"> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        surface: '#1a1a1a',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                        diffEasy: '#00b8a3',
+                        diffMed: '#ffc01e',
+                        diffHard: '#ff375f'
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .bg-tech-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        /* Custom Scrollbar for the table if needed */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121312; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #444; }
+    </style>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20">
+
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="../index.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath</span>
+        </a>
+        <nav class="flex items-center gap-6 text-sm font-medium">
+            <a href="patterns.html" class="text-textSecondary hover:text-white transition-colors">Patterns</a>
+            <a href="topics.html" class="text-primary font-bold">Topics</a>
+            <a href="../mentorship/chat.html" class="text-textSecondary hover:text-white transition-colors">Mentorship</a>
+            <div class="flex items-center gap-2 px-3 py-1 rounded-full border border-secondary/30 bg-white/5">
+                <span class="text-xs text-secondary">CREDITS</span>
+                <span class="font-bold text-white">4</span>
+            </div>
+             <div class="w-8 h-8 rounded-full bg-surface border border-secondary/50 flex items-center justify-center overflow-hidden">
+                <svg class="w-5 h-5 text-textMuted" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+             </div>
+        </nav>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-6 pt-28">
+
+        <div class="flex justify-between items-end mb-4">
+            <div class="text-xs font-bold tracking-widest text-textMuted uppercase">
+                <a href="topics.html" class="hover:text-primary transition-colors">Topics</a> / <span class="text-primary" id="topic-breadcrumb">Arrays</span>
+            </div>
+            <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-textMuted">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span>Last updated: Dec 13, 2025</span>
+            </div>
+        </div>
+
+        <div class="mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-3" id="topic-title">Top Array Interview Questions</h1>
+            <p class="text-xl text-textMuted mb-6 font-light" id="topic-subtitle">Structured Path with Video Solutions</p>
+            <p class="max-w-3xl text-textSecondary leading-relaxed text-sm md:text-base" id="topic-desc">
+                A complete roadmap to mastering Array data structures. From basic linear iteration to complex two-pointer and sliding window problems seen in FAANG interviews.
+            </p>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-4 justify-between items-center mb-8 bg-surface/30 p-2 rounded-xl border border-white/5 backdrop-blur-sm">
+            <div class="flex gap-2 w-full md:w-auto">
+                <button class="bg-primary text-white px-5 py-2 rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary-hover transition-all">All Problems</button>
+                <button class="bg-transparent text-textSecondary px-5 py-2 rounded-lg text-sm font-medium hover:bg-white/5 transition-colors">Revision</button>
+            </div>
+            
+            <div class="flex gap-3 w-full md:w-auto">
+                <div class="relative flex-grow md:w-64">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-textMuted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    <input type="text" placeholder="Search problems..." class="w-full bg-[#0a0a0a] border border-white/10 rounded-lg py-2 pl-10 pr-4 text-sm text-textPrimary focus:outline-none focus:border-secondary/50 transition-colors">
+                </div>
+                <button class="flex items-center gap-2 border border-secondary text-secondary px-4 py-2 rounded-lg text-sm font-bold hover:bg-secondary/10 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                    Random
+                </button>
+            </div>
+        </div>
+
+        <div class="glass-panel p-6 rounded-2xl mb-12 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div class="flex items-center gap-6">
+                <div class="relative w-20 h-20">
+                    <svg class="w-full h-full transform -rotate-90">
+                        <circle cx="40" cy="40" r="36" stroke="#2a2a2a" stroke-width="8" fill="transparent"/>
+                        <circle id="progress-ring" cx="40" cy="40" r="36" stroke="#ad0013" stroke-width="8" fill="transparent" stroke-dasharray="226" stroke-dashoffset="226" stroke-linecap="round" class="transition-all duration-1000 ease-out"/>
+                    </svg>
+                    <div class="absolute inset-0 flex items-center justify-center text-sm font-bold text-white" id="progress-text">0%</div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Overall Progress</h3>
+                    <p class="text-sm text-textMuted" id="progress-count">0 of 0 Problems Solved</p>
+                </div>
+            </div>
+            
+            <div class="flex gap-8 text-center">
+                <div>
+                    <div class="text-sm font-bold text-diffEasy" id="count-easy">0 / 0</div>
+                    <div class="text-xs text-textMuted font-bold tracking-wider mt-1">EASY</div>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-diffMed" id="count-med">0 / 0</div>
+                    <div class="text-xs text-textMuted font-bold tracking-wider mt-1">MEDIUM</div>
+                </div>
+                <div>
+                    <div class="text-sm font-bold text-diffHard" id="count-hard">0 / 0</div>
+                    <div class="text-xs text-textMuted font-bold tracking-wider mt-1">HARD</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-12 gap-4 px-4 py-2 text-xs font-bold text-textMuted uppercase tracking-wider border-b border-white/5 mb-2">
+            <div class="col-span-1">Status</div>
+            <div class="col-span-5 md:col-span-4">Problem</div>
+            <div class="col-span-2 text-center hidden md:block">Resource</div>
+            <div class="col-span-2 md:col-span-1 text-center">Practice</div>
+            <div class="col-span-1 text-center hidden md:block">Note</div>
+            <div class="col-span-1 text-center hidden md:block">Revision</div>
+            <div class="col-span-2 md:col-span-1 text-right">Diff</div>
+        </div>
+
+        <div id="problems-container" class="space-y-1">
+            </div>
+
+    </main>
+
+    <script>
+        // --- 1. CONFIGURATION (EDIT THIS FOR OTHER TOPICS) ---
+    const topicConfig = {
+    id: 'trees',
+    title: 'Trees & BST',
+    breadcrumb: 'Trees',
+    subtitle: 'Recursion, DFS, BFS, and Traversals.',
+    description: 'Trees are heavily tested. Master recursion for DFS and Queues for BFS (Level Order Traversal).'
+};
+
+const problems = [
+    { id: 1, title: "Invert Binary Tree", difficulty: "Easy", link: "https://leetcode.com/problems/invert-binary-tree/", video: "#", doc: "#" },
+    { id: 2, title: "Maximum Depth of Binary Tree", difficulty: "Easy", link: "https://leetcode.com/problems/maximum-depth-of-binary-tree/", video: "#", doc: "#" },
+    { id: 3, title: "Diameter of Binary Tree", difficulty: "Easy", link: "https://leetcode.com/problems/diameter-of-binary-tree/", video: "#", doc: "#" },
+    { id: 4, title: "Balanced Binary Tree", difficulty: "Easy", link: "https://leetcode.com/problems/balanced-binary-tree/", video: "#", doc: "#" },
+    { id: 5, title: "Same Tree", difficulty: "Easy", link: "https://leetcode.com/problems/same-tree/", video: "#", doc: "#" },
+    { id: 6, title: "Subtree of Another Tree", difficulty: "Easy", link: "https://leetcode.com/problems/subtree-of-another-tree/", video: "#", doc: "#" },
+    { id: 7, title: "Lowest Common Ancestor of a BST", difficulty: "Medium", link: "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/", video: "#", doc: "#" },
+    { id: 8, title: "Binary Tree Level Order Traversal", difficulty: "Medium", link: "https://leetcode.com/problems/binary-tree-level-order-traversal/", video: "#", doc: "#" },
+    { id: 9, title: "Validate Binary Search Tree", difficulty: "Medium", link: "https://leetcode.com/problems/validate-binary-search-tree/", video: "#", doc: "#" },
+    { id: 10, title: "Kth Smallest Element in a BST", difficulty: "Medium", link: "https://leetcode.com/problems/kth-smallest-element-in-a-bst/", video: "#", doc: "#" }
+];
+  
+        // --- 2. LOGIC (DO NOT EDIT) ---
+        
+        // Colors for Difficulty
+        const diffColors = {
+            'Easy': 'text-diffEasy bg-diffEasy/10 border-diffEasy/20',
+            'Medium': 'text-diffMed bg-diffMed/10 border-diffMed/20',
+            'Hard': 'text-diffHard bg-diffHard/10 border-diffHard/20'
+        };
+
+        // Initialize Page Content
+        document.getElementById('topic-title').textContent = topicConfig.title;
+        document.getElementById('topic-breadcrumb').textContent = topicConfig.breadcrumb;
+        document.getElementById('topic-subtitle').textContent = topicConfig.subtitle;
+        document.getElementById('topic-desc').textContent = topicConfig.description;
+        document.title = `${topicConfig.breadcrumb} | PatternPath`;
+
+        const container = document.getElementById('problems-container');
+        
+        // Render Rows
+        problems.forEach(prob => {
+            const row = document.createElement('div');
+            row.className = 'group grid grid-cols-12 gap-4 px-4 py-4 rounded-lg bg-[#151515] border border-transparent hover:border-secondary/30 hover:bg-[#1a1a1a] transition-all items-center';
+            
+            // Checkbox ID
+            const checkId = `check-${topicConfig.id}-${prob.id}`;
+
+            row.innerHTML = `
+                <div class="col-span-1 flex items-center">
+                    <input type="checkbox" id="${checkId}" class="peer w-5 h-5 rounded border border-white/20 bg-black checked:bg-primary checked:border-primary cursor-pointer transition-colors appearance-none relative" onclick="updateProgress()">
+                    <svg class="w-3.5 h-3.5 absolute ml-0.5 pointer-events-none opacity-0 peer-checked:opacity-100 text-white transition-opacity" viewBox="0 0 14 10" fill="none"><path d="M1 5L4.5 8.5L13 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+
+                <div class="col-span-5 md:col-span-4 font-medium text-textPrimary group-hover:text-white transition-colors text-sm">${prob.title}</div>
+
+                <div class="col-span-2 hidden md:flex justify-center gap-3">
+                    <a href="${prob.video}" class="text-textMuted hover:text-white transition-colors" title="Video Solution">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </a>
+                    <a href="${prob.doc}" class="text-textMuted hover:text-white transition-colors" title="Article">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </a>
+                </div>
+
+                <div class="col-span-2 md:col-span-1 flex justify-center">
+                    <a href="${prob.link}" target="_blank" class="text-xs font-bold text-textMuted hover:text-primary transition-colors">LC</a>
+                </div>
+
+                <div class="col-span-1 hidden md:flex justify-center">
+                    <button class="text-textMuted hover:text-secondary transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                    </button>
+                </div>
+
+                <div class="col-span-1 hidden md:flex justify-center">
+                    <button class="text-textMuted hover:text-yellow-400 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                    </button>
+                </div>
+
+                <div class="col-span-2 md:col-span-1 text-right">
+                    <span class="text-[10px] font-bold px-2 py-1 rounded border ${diffColors[prob.difficulty]}">${prob.difficulty}</span>
+                </div>
+            `;
+            container.appendChild(row);
+        });
+
+        // --- 3. PROGRESS LOGIC ---
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+            const total = checkboxes.length;
+            const percentage = total === 0 ? 0 : Math.round((checked / total) * 100);
+
+            // Update Circle
+            const circle = document.getElementById('progress-ring');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            const offset = circumference - (percentage / 100) * circumference;
+            circle.style.strokeDashoffset = offset;
+
+            // Update Text
+            document.getElementById('progress-text').textContent = `${percentage}%`;
+            document.getElementById('progress-count').textContent = `${checked} of ${total} Problems Solved`;
+
+            // Update Counts (Easy/Med/Hard) logic here...
+            const counts = { Easy: 0, Medium: 0, Hard: 0 };
+            const totals = { Easy: 0, Medium: 0, Hard: 0 };
+            
+            problems.forEach((p, index) => {
+                totals[p.difficulty]++;
+                if(checkboxes[index].checked) counts[p.difficulty]++;
+            });
+
+            document.getElementById('count-easy').textContent = `${counts.Easy} / ${totals.Easy}`;
+            document.getElementById('count-med').textContent = `${counts.Medium} / ${totals.Medium}`;
+            document.getElementById('count-hard').textContent = `${counts.Hard} / ${totals.Hard}`;
+        }
+
+        // Initialize progress on load
+        updateProgress();
+
+    </script>
+</body>
+</html>
