@@ -119,6 +119,13 @@ PatternPath aims to help students stop relearning the same concepts again and ag
 
 ---
 
+video preview :
+https://youtu.be/CBZKj7czN30?si=CL9aQGmAFkTPfHBg
+
+---
+
+
+
 ## License
 
 This project is licensed under the **MIT License**.  
