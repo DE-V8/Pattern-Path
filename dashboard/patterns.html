@@ -58,7 +58,7 @@
                 <span class="text-sm font-bold text-secondary credits-display-value">...</span>
             </div>
             <!-- LOGOUT -->
-            <button onclick="Auth.logout()" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
+            <button id="logoutBtn" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
                 Logout
             </button>
         </nav>
@@ -455,7 +455,6 @@
 
     </main>
     <script src="../assets/dashboard-progress.js"></script>
-    <script src="../assets/dashboard-progress.js"></script>
     <!-- 1. Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
@@ -467,6 +466,19 @@
 
     <script src="../assets/credits.js"></script>
     <script src="../assets/auth.js"></script>
-    <script>Auth.requireLogin();</script>
+    <script>
+        Auth.requireLogin();
+
+        // Logout Wiring
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    Auth.logout();
+                });
+            }
+        });
+    </script>
 </body>
 </html>

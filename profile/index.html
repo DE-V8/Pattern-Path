@@ -49,7 +49,8 @@
         <nav class="flex items-center gap-6 text-sm font-medium">
             <span class="text-primary font-bold">Profile</span>
             <!-- LOGOUT -->
-            <button onclick="Auth.logout()" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
+            <!-- LOGOUT -->
+            <button id="logoutBtn" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
                 Logout
             </button>
         </nav>
@@ -134,68 +135,12 @@
     <!-- 3. Sync Helper (Global) -->
     <script src="../assets/supabase-client.js"></script>
 
+    <!-- 4. App Logic -->
     <script src="../assets/auth.js"></script>
     <script src="../assets/credits.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // 1. Enforce Login
-            Auth.requireLogin();
-
-            // 2. Load User Data (Offline First)
-            const currentUser = Auth.getCurrentUser();
-            const users = JSON.parse(localStorage.getItem('users') || '{}');
-            const fullUser = users[currentUser.email]; // Get full details (createdAt etc)
-
-            if (fullUser) {
-                document.getElementById('profile-email').textContent = fullUser.email;
-                document.getElementById('profile-joined').textContent = new Date(fullUser.createdAt).toLocaleDateString();
-                document.getElementById('profile-login').textContent = new Date(fullUser.lastLoginAt).toLocaleString();
-            }
-
-            // 3. Load Stats (localStorage source of truth)
-            const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
-            let totalSolved = 0;
-            let lessonsStarted = 0;
-            
-            Object.values(progress).forEach(p => {
-                if (p.completed && p.completed.length > 0) {
-                    totalSolved += p.completed.length;
-                    lessonsStarted++;
-                }
-            });
-
-            // Assuming ~30 patterns * ~5 problems = 150 total (rough estimate for demo)
-            const ESTIMATED_TOTAL_PROBLEMS = 150; 
-            const completionRate = Math.round((totalSolved / ESTIMATED_TOTAL_PROBLEMS) * 100);
-
-            document.getElementById('stats-solved').textContent = totalSolved;
-            document.getElementById('stats-lessons').textContent = lessonsStarted;
-            document.getElementById('stats-completion').textContent = `${completionRate}%`;
-            
-            // Credits (handled by credits.js init but we can read direct for instant render)
-            const credits = localStorage.getItem('userCredits') || '0';
-            document.getElementById('stats-credits').textContent = credits;
-
-            // 4. Sync Status Check
-            if (!navigator.onLine) {
-                const status = document.getElementById('sync-status');
-                status.className = "text-xs font-bold px-3 py-1 rounded-full bg-red-900/20 text-red-500 border border-red-500/20 flex items-center gap-2";
-                status.innerHTML = `<span class="w-2 h-2 rounded-full bg-red-500"></span> Offline Mode`;
-            } else {
-                 // Try a quick ping or check sync module
-                 try {
-                     const module = await import('../assets/supabase-client.js');
-                     if (!module.Sync.isOnline()) {
-                        throw new Error('Offline');
-                     }
-                 } catch(e) {
-                    const status = document.getElementById('sync-status');
-                    status.className = "text-xs font-bold px-3 py-1 rounded-full bg-yellow-900/20 text-yellow-500 border border-yellow-500/20 flex items-center gap-2";
-                    status.innerHTML = `<span class="w-2 h-2 rounded-full bg-yellow-500"></span> Sync Warning`;
-                 }
-            }
-        });
-    </script>
+    
+    <!-- 5. Profile Logic -->
+    <script src="profile.js"></script>
 
 </body>
 </html>

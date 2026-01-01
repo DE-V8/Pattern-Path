@@ -110,6 +110,7 @@ body {
 .text-gradient-luxury {
     background: linear-gradient(135deg, #a67d43 0%, #ededed 50%, #ad0013 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -144,4 +145,23 @@ body {
 
 .text-diff-hard {
     color: #ad0013;
+}
+
+/* FADE UP ENTRANCE ANIMATION (Requested) */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    /* start hidden to avoid flash */
+    opacity: 0;
+    animation: fadeUp 0.6s ease-out forwards;
 }

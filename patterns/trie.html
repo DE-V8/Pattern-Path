@@ -83,7 +83,7 @@
     <main class="relative z-10 max-w-5xl mx-auto px-6 pt-28">
 
         <!-- 1. PAGE HEADER -->
-        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6 mb-8 animate-fade-up">
             <div class="space-y-4 max-w-2xl">
                 <div class="flex items-center gap-2 text-xs text-textMuted uppercase tracking-wider">
                     <a href="../dashboard/patterns.html" class="hover:text-secondary transition-colors">Patterns</a>
@@ -108,7 +108,7 @@
         </div>
 
         <!-- 2. FILTER & ACTION BAR -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 sticky top-20 z-40 py-4 -mx-4 px-4 backdrop-blur-md bg-background/80 md:rounded-xl border-y md:border border-secondary-dim/50">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 sticky top-20 z-40 py-4 -mx-4 px-4 backdrop-blur-md bg-background/80 md:rounded-xl border-y md:border border-secondary-dim/50 animate-fade-up" style="animation-delay: 0.1s">
             
             <!-- Left: Toggle Buttons -->
             <div class="flex items-center bg-white/5 rounded-lg p-1 border border-secondary-dim">
@@ -134,7 +134,7 @@
         </div>
 
         <!-- 3. PROGRESS CARD (Glassmorphism) -->
-        <div class="glass-panel p-6 rounded-2xl border border-secondary-dim shadow-xl mb-10 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="glass-panel p-6 rounded-2xl border border-secondary-dim shadow-xl mb-10 flex flex-col md:flex-row items-center justify-between gap-8 animate-fade-up" style="animation-delay: 0.2s">
             
             <div class="flex items-center gap-6">
                  <!-- CIRCULAR PROGRESS -->
@@ -176,7 +176,7 @@
 
 <!-- 4. PATTERN/PROBLEM TABLE -->
         <!-- TABLE COLUMN VISIBILITY: Hidden on mobile (md:hidden) for complex columns -->
-        <div class="glass-panel rounded-xl overflow-hidden border border-secondary-dim shadow-xl">
+        <div class="glass-panel rounded-xl overflow-hidden border border-secondary-dim shadow-xl animate-fade-up" style="animation-delay: 0.3s">
             
             <!-- TABLE HEADER -->
             <div class="grid grid-cols-[auto_1fr_auto_auto_auto_auto_auto] gap-4 items-center bg-white/5 p-4 border-b border-secondary-dim text-xs font-bold text-textSecondary uppercase tracking-wider">
@@ -201,6 +201,7 @@
     <!-- SCRIPTS -->
     <script src="../assets/script.js"></script>
     <script src="../assets/progress.js"></script>
+    <script src="../assets/auth.js"></script>
     <script src="../assets/credits.js"></script>
     <!-- DATA-DRIVEN CONTENT SCRIPT -->
     <script type="module">
@@ -278,5 +279,14 @@
             tableBody.appendChild(row);
         });
     </script>
+
+    <!-- SUPABASE & SYNC -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/init-supabase.js"></script>
+    <script src="../assets/supabase-client.js"></script>
+    <script src="../js/sync-progress.js" type="module"></script>
 </body>
 </html>
+
+
+

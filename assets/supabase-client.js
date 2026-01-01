@@ -1,28 +1,13 @@
 /**
- * SUPABASE CLIENT (SYNC LAYER)
- * ---------------------------------------
- * This script initializes Supabase and provides helper methods to sync data.
- * It uses the anon key which is safe for client-side use with RLS policies (assumed).
- * 
- * OFFLINE-FIRST PHILOSOPHY:
- * 1. App reads/writes to localStorage immediately.
- * 2. If online, this client pushes updates to Supabase (Upsert).
- * 3. On load, it fetches from Supabase and merges into localStorage.
- */
-
-// Import Supabase from CDN
-/**
  * SUPABASE CLIENT (SYNC LAYER - GLOBAL)
  * ---------------------------------------
  * This script provides helper methods to sync data using the global `window.supabase` client.
  * 
  * OFFLINE-FIRST PHILOSOPHY:
- * 1. App reads/writes to localStorage immediately.
- * 2. If online, this client pushes updates to Supabase (Upsert).
- * 3. On load, it fetches from Supabase and merges into localStorage.
+ * 1. App reads/writes to localStorage immediately (fast UI).
+ * 2. If online, this client pushes updates to Supabase (Cloud backup).
+ * 3. On login, it fetches from Supabase and updates localStorage (Restore).
  */
-
-// NOTE: This script assumes 'window.supabase' is already initialized by init-supabase.js
 
 (function() {
     
@@ -34,131 +19,201 @@
     const Sync = {
         
         /**
-         * Check if online
+         * Check if online and client is ready
          */
         isOnline() {
             return navigator.onLine && !!window.supabase;
         },
 
         /**
-         * Sync User Profile (Upsert)
-         * @param {object} user { email, createdAt, lastLoginAt }
+         * 1. SYNC USER PROFILE
+         * Saves basic user info to 'users' table.
+         */
+        /**
+         * 1. SYNC USER PROFILE
          */
         async syncUser(user) {
             if (!this.isOnline()) return;
+            
+            // STRICT SESSION CHECK
+            const { data } = await window.supabase.auth.getSession();
+            if (!data || !data.session || !data.session.user) return;
+            const userId = data.session.user.id;
+
             try {
+                // Upsert using ID as the key
                 const { error } = await window.supabase
                     .from('users')
                     .upsert({ 
+                        id: userId, // Use ID as primary key
                         email: user.email, 
-                        created_at: user.createdAt,
-                        last_login_at: user.lastLoginAt
-                    }, { onConflict: 'email' });
+                        // created_at: user.createdAt, // CreatedAt is usually managed by Auth or default
+                        last_login_at: new Date().toISOString()
+                    }, { onConflict: 'id' });
                     
-                if (error) console.warn('Supabase User Sync Error:', error);
+                if (error) console.warn('Sync User Error:', error);
             } catch (e) {
-                console.warn('Supabase User Sync Failed:', e); // Fail silently
+                console.warn('Sync User Failed:', e); 
             }
         },
 
         /**
-         * Sync Lesson Progress (Upsert)
-         * @param {string} email
-         * @param {string} lessonId
-         * @param {array} completed Array of completed problem indices
+         * 2. SYNC LESSON PROGRESS
          */
-        async syncProgress(email, lessonId, completed) {
+        async syncProgress(email, lessonId, completed, total) {
             if (!this.isOnline()) return;
+
+            // STRICT SESSION CHECK
+            const { data } = await window.supabase.auth.getSession();
+            if (!data || !data.session || !data.session.user) return;
+            const userId = data.session.user.id;
+            
             try {
                 const { error } = await window.supabase
                     .from('lesson_progress')
                     .upsert({
-                        user_email: email,
+                        user_id: userId, 
                         lesson_id: lessonId,
-                        completed: completed,
+                        completed_indices: completed, // Fixed column name
+                        total: total || 0,
                         updated_at: new Date().toISOString()
-                    }, { onConflict: 'user_email, lesson_id' }); // Composite key assumption
+                    }, { onConflict: 'user_id, lesson_id' });
 
-                if (error) console.warn('Supabase Progress Sync Error:', error);
+                if (error) console.warn('Sync Progress Error:', error);
+                else console.log(`☁️ Progress synced for ${lessonId}`);
             } catch (e) {
-                console.warn('Supabase Progress Sync Failed:', e);
+                console.warn('Sync Progress Failed:', e);
             }
         },
 
         /**
-         * Fetch All Progress for User (Merge Strategy)
-         * @param {string} email 
-         * @returns {object|null} Map of lessonId -> { completed: [] }
+         * 3. FETCH & RESTORE PROGRESS
          */
         async fetchProgress(email) {
             if (!this.isOnline()) return null;
+
+            // STRICT SESSION CHECK
+            const { data } = await window.supabase.auth.getSession();
+            if (!data || !data.session || !data.session.user) return null;
+            const userId = data.session.user.id;
+            
+            console.log("Fetching progress for user_id:", userId);
+
             try {
-                const { data, error } = await window.supabase
+                const { data: progressData, error } = await window.supabase
                     .from('lesson_progress')
-                    .select('lesson_id, completed')
-                    .eq('user_email', email);
+                    .select('lesson_id, completed_indices') // Fixed column name
+                    .eq('user_id', userId);
 
                 if (error) throw error;
                 
-                // Transform to map
+                // Convert list to map
                 const map = {};
-                data.forEach(row => {
-                    map[row.lesson_id] = { completed: row.completed };
-                });
+                if (progressData) {
+                    progressData.forEach(row => {
+                        // Map remote 'completed_indices' back to local 'completed'
+                        map[row.lesson_id] = { completed: row.completed_indices || [] };
+                    });
+                }
+                
+                // Update LocalStorage
+                if (Object.keys(map).length > 0) {
+                    const current = JSON.parse(localStorage.getItem('lessonProgress')) || {};
+                    const merged = { ...current, ...map };
+                    localStorage.setItem('lessonProgress', JSON.stringify(merged));
+                    console.log('📥 Progress Restored from Cloud');
+                }
+
                 return map;
             } catch (e) {
-                console.warn('Supabase Fetch Progress Failed:', e);
+                console.warn('Fetch Progress Failed:', e);
                 return null;
             }
         },
 
         /**
-         * Sync Credits (Upsert)
-         * @param {string} email
-         * @param {number} credits
+         * 4. SYNC CREDITS
          */
         async syncCredits(email, credits) {
             if (!this.isOnline()) return;
+
+            // STRICT SESSION CHECK
+            const { data } = await window.supabase.auth.getSession();
+            if (!data || !data.session || !data.session.user) return;
+            const userId = data.session.user.id;
+            
             try {
                 const { error } = await window.supabase
                     .from('user_credits')
                     .upsert({
-                        user_email: email,
+                        user_id: userId, // Fixed column
                         credits: credits,
                         updated_at: new Date().toISOString()
-                    }, { onConflict: 'user_email' });
+                    }, { onConflict: 'user_id' });
 
-                if (error) console.warn('Supabase Credits Sync Error:', error);
+                if (error) console.warn('Sync Credits Error:', error);
+                else console.log(`☁️ Credits synced: ${credits}`);
             } catch (e) {
-                console.warn('Supabase Credits Sync Failed:', e);
+                console.warn('Sync Credits Failed:', e);
             }
         },
         
         /**
-         * Fetch Credits
-         * @param {string} email
-         * @returns {number|null} credits
+         * 5. FETCH & RESTORE CREDITS
          */
         async fetchCredits(email) {
             if (!this.isOnline()) return null;
-            try {
-                const { data, error } = await window.supabase
-                    .from('user_credits')
-                    .select('credits')
-                    .eq('user_email', email)
-                    .single();
 
-                if (error) return null;
-                return data.credits;
+            // STRICT SESSION CHECK
+            const { data } = await window.supabase.auth.getSession();
+            if (!data || !data.session || !data.session.user) return null;
+            const userId = data.session.user.id;
+            
+            console.log("Fetching credits for user_id:", userId);
+            
+            try {
+                let { data, error } = await window.supabase
+                    .from("user_credits")
+                    .select("credits")
+                    .eq("user_id", userId);
+
+                // Insert Default if missing
+                if (!error && (!data || data.length === 0)) {
+                    console.log('Credits: No row found, creating default...');
+                    await window.supabase.from("user_credits").insert({
+                        user_id: userId,
+                        credits: 0
+                    });
+                    // Set default for immediate return
+                    data = [{ credits: 0 }];
+                }
+
+                if (error) {
+                     console.warn('Fetch Credits Error:', error);
+                     return null;
+                }
+                
+                const credits = data?.[0]?.credits ?? 0;
+                
+                localStorage.setItem('userCredits', credits.toString());
+                console.log(`📥 Credits Restored: ${credits}`);
+                
+                // Update UI if exposed
+                if (window.updateCreditsUI) window.updateCreditsUI();
+                
+                return credits;
+                
             } catch (e) {
-                console.warn('Supabase Fetch Credits Failed:', e);
+                console.warn('Fetch Credits Failed:', e);
                 return null;
             }
         }
     };
+        
+    
 
     // Attach to Global Window
     window.Sync = Sync;
-    console.log('Sync Layer initialized globally.');
+    console.log('✅ Sync Layer Ready');
 
 })();

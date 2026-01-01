@@ -45,7 +45,7 @@
             <span class="text-sm font-bold text-secondary credits-display-value">...</span>
         </div>
         <!-- LOGOUT BUTTON -->
-        <button onclick="Auth.logout()" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full">
+        <button id="logoutBtn" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full">
             Logout
         </button>
     </div>
@@ -156,6 +156,16 @@
     <script src="../assets/auth.js"></script>
     <script>
         Auth.requireLogin();
+        
+        // Explicitly attach listener to avoid onclick issues
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Logout button clicked via listener');
+                Auth.logout();
+            });
+        }
     </script>
 
 </body>

@@ -75,7 +75,7 @@
                 <span class="text-sm font-bold text-secondary credits-display-value">...</span>
             </div>
             <!-- LOGOUT -->
-            <button onclick="Auth.logout()" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
+            <button id="logoutBtn" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
                 Logout
             </button>
         </nav>
@@ -93,7 +93,7 @@
             </div>
             <div class="text-right">
                 <div class="text-xs text-textSecondary uppercase tracking-wider">Credits remaining</div>
-                <div class="text-xl font-bold text-secondary" id="credit-display">--</div>
+                <div class="text-xl font-bold text-secondary" id="credits-remaining">--</div>
             </div>
         </div>
 
@@ -134,85 +134,6 @@
     </main>
 
     <!-- LOGIC -->
-    <script>
-        // 1. STATE
-        let credits = parseInt(localStorage.getItem('credits'));
-        // If simulated backend didn't set it (direct access), default to 3
-        if (isNaN(credits)) {
-            credits = 3;
-            localStorage.setItem('credits', '3');
-        }
-
-        const creditDisplay = document.getElementById('credit-display');
-        const chatLog = document.getElementById('chat-log');
-        const chatInput = document.getElementById('chat-input');
-        const chatForm = document.getElementById('chat-form');
-        const errorMsg = document.getElementById('error-msg');
-
-        // Update UI
-        function updateUI() {
-            creditDisplay.textContent = credits;
-            if (credits <= 0) {
-                chatInput.disabled = true;
-                chatInput.placeholder = "No credits remaining.";
-                errorMsg.classList.remove('hidden');
-                // Remove blinking cursor visual
-                document.querySelector('.cursor-blink').classList.add('hidden');
-            }
-        }
-        updateUI();
-
-        // 2. APPEND MESSAGE
-        function appendMessage(sender, text, isSystem = false) {
-            const div = document.createElement('div');
-            
-            // Styles
-            const senderClass = sender.includes('mentor') ? 'text-primary' : (sender.includes('student') ? 'text-secondary' : 'text-textMuted');
-            const opacityClass = sender.includes('mentor') ? 'opacity-90' : 'opacity-100';
-            
-            div.innerHTML = `<span class="${senderClass} font-bold mr-2">${sender}:~$</span><span class="${opacityClass}">${text}</span>`;
-            chatLog.appendChild(div);
-            
-            // Auto scroll
-            chatLog.scrollTop = chatLog.scrollHeight;
-        }
-
-        // 3. SEND LOGIC
-        function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-            if (credits <= 0) return;
-
-            // Student Message
-            appendMessage('student@you', text);
-            chatInput.value = '';
-
-            // Consume Credit
-            credits--;
-            localStorage.setItem('credits', credits.toString());
-            updateUI();
-
-            // Fake Mentor Response
-            setTimeout(() => {
-                const responses = [
-                    "Noted. Review your window conditions.",
-                    "Check the edge case where k=0.",
-                    "Have you considered using a hash map here?",
-                    "That looks correct. Proceed to implementation.",
-                    "Review the time complexity constraints."
-                ];
-                const randomResp = responses[Math.floor(Math.random() * responses.length)];
-                
-                appendMessage('mentor@rohit', randomResp);
-            }, 1000 + Math.random() * 2000); // Random delay 1-3s
-        }
-
-        // Focus input on load
-        if (credits > 0) {
-            chatInput.focus();
-        }
-
-    </script>
     <!-- 1. Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
@@ -224,6 +145,105 @@
 
     <script src="../assets/credits.js"></script>
     <script src="../assets/auth.js"></script>
-    <script>Auth.requireLogin();</script>
+    
+    <!-- 4. PAGE LOGIC -->
+    <script>
+        Auth.requireLogin();
+        
+        // Explicitly attach listener to avoid onclick issues
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Logout button clicked via listener');
+                Auth.logout();
+            });
+        }
+
+        // --- MENTORSHIP TERMINAL LOGIC ---
+        // 1. STATE & ELEMENTS
+        const chatLog = document.getElementById('chat-log');
+        const chatInput = document.getElementById('chat-input');
+        const errorMsg = document.getElementById('error-msg');
+        
+        // Wait for credits.js to load
+        document.addEventListener('DOMContentLoaded', () => {
+             // Initial Check
+             checkCredits();
+        });
+
+        function checkCredits() {
+            const current = window.getLocalCredits ? window.getLocalCredits() : 0;
+            if (current <= 0) {
+                disableChat();
+            } else {
+                enableChat();
+            }
+        }
+
+        function disableChat() {
+            chatInput.disabled = true;
+            chatInput.placeholder = "No credits remaining.";
+            if(errorMsg) errorMsg.classList.remove('hidden');
+            const blink = document.querySelector('.cursor-blink');
+            if(blink) blink.classList.add('hidden');
+        }
+
+        function enableChat() {
+            chatInput.disabled = false;
+            chatInput.placeholder = "Type your question here...";
+            if(errorMsg) errorMsg.classList.add('hidden');
+            const blink = document.querySelector('.cursor-blink');
+            if(blink) blink.classList.remove('hidden');
+            chatInput.focus();
+        }
+
+        // 2. APPEND MESSAGE
+        function appendMessage(sender, text, isSystem = false) {
+            const div = document.createElement('div');
+            const senderClass = sender.includes('mentor') ? 'text-primary' : (sender.includes('student') ? 'text-secondary' : 'text-textMuted');
+            const opacityClass = sender.includes('mentor') ? 'opacity-90' : 'opacity-100';
+            div.innerHTML = `<span class="${senderClass} font-bold mr-2">${sender}:~$</span><span class="${opacityClass}">${text}</span>`;
+            chatLog.appendChild(div);
+            // Auto scroll
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // 3. SEND LOGIC
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // Strict Credit Check
+            const currentCredits = window.getLocalCredits ? window.getLocalCredits() : 0;
+            if (currentCredits <= 0) {
+                disableChat();
+                return;
+            }
+
+            // Student Message
+            appendMessage('student@you', text);
+            chatInput.value = '';
+
+            // CONSUME CREDIT (Global)
+            const newBalance = currentCredits - 1;
+            if (window.UserCredits) window.UserCredits.set(newBalance);
+            
+            checkCredits(); // Re-eval UI state
+
+            // Fake Mentor Response
+            setTimeout(() => {
+                const responses = [
+                    "Noted. Review your window conditions.",
+                    "Check the edge case where k=0.",
+                    "Have you considered using a hash map here?",
+                    "That looks correct. Proceed to implementation.",
+                    "Review the time complexity constraints."
+                ];
+                const randomResp = responses[Math.floor(Math.random() * responses.length)];
+                appendMessage('mentor@rohit', randomResp);
+            }, 1000 + Math.random() * 2000);
+        }
+    </script>
 </body>
 </html>
