@@ -106,9 +106,9 @@ Students who never pay still get **full access to all learning material**.
 
 ## Tech Stack 
 
-- Frontend: Tailwind, React, HTML
-- Backend: Java, Springboot
-- Database: MySQL
+- HTML5, Tailwind CSS
+- Vanilla JavaScript
+- Python (for static generation)
 
 
 ---
