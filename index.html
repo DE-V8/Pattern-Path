@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PatternPath - Learn once, revise forever</title>
+    <meta name="description" content="One stop learning platform for Data Structures, Algorithms, and System Design interviews.">
+    
+    <!-- FONTS: JetBrains Mono (Primary) -->
+    <!-- FONT FAMILY: Swap 'JetBrains Mono' here if you want a different mono font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- CSS: Custom Styles -->
+    <link rel="stylesheet" href="assets/styles.css">
+
+    <!-- TAILWIND CSS (CDN for immediate preview, config injected to override defaults) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // TAILWIND CONFIGURATION
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // BASE BACKGROUND COLOR: #121312
+                        background: '#121312',
+                        
+                        // PRIMARY ACCENT: Luxury Red #ad0013
+                        primary: {
+                            DEFAULT: '#ad0013',
+                            hover: '#8a000f',
+                            glow: 'rgba(173, 0, 19, 0.5)',
+                        },
+                        
+                        // SECONDARY ACCENT: Royal Gold #a67d43
+                        secondary: {
+                            DEFAULT: '#a67d43',
+                            dim: 'rgba(166, 125, 67, 0.25)', 
+                        },
+                        
+                        // TEXT COLORS
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: {
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out 3s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<!-- BASE BACKGROUND COLOR -->
+<body class="bg-background text-textPrimary font-mono antialiased overflow-x-hidden selection:bg-primary-glow selection:text-white">
+
+    <!-- NAVIGATION BAR -->
+    <!-- GLASS BORDER COLOR implied by border-secondary-dim -->
+    <header class="fixed w-full top-0 z-50 transition-all duration-300 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <!-- LOGO AREA -->
+            <!-- LOGO AREA -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <!-- LOGO: Custom 'PatternPath' Icon (Red/Gold) -->
+                <svg class="h-8 w-8" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+                    <circle cx="20" cy="20" r="3" fill="#ad0013" class="group-hover:animate-pulse"/>
+                </svg>
+                <span class="text-xl font-bold tracking-tighter text-textPrimary group-hover:text-primary transition-colors">PatternPath</span>
+            </a>
+
+            <!-- DESKTOP MENU -->
+            <nav class="hidden md:flex items-center gap-8">
+                <!-- SECONDARY TEXT hover PRIMARY ACCENT -->
+                <a href="index.html" class="text-sm font-medium text-textSecondary hover:text-primary transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                    Home
+                </a>
+                <a href="dashboard/patterns.html" class="text-sm font-medium text-textSecondary hover:text-primary transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    Dashboard
+                </a>
+                <a href="#" class="text-sm font-medium text-textSecondary hover:text-primary transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Creators
+                </a>
+            </nav>
+
+            <!-- CTA BUTTON -->
+             <!-- PRIMARY ACCENT BUTTON -->
+            <div class="flex items-center gap-4">
+                <a href="auth/login.html" class="hidden sm:inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-textPrimary text-sm font-bold py-2.5 px-6 rounded-full transition-all duration-300 shadow-[0_0_20px_rgba(173,0,19,0.4)] hover:shadow-[0_0_30px_rgba(173,0,19,0.6)] hover:-translate-y-0.5">
+                    Get Started
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </a>
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-textPrimary p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <main class="relative min-h-screen pt-24 pb-12 flex items-center justify-center overflow-hidden">
+        
+        <!-- GLOW EFFECTS (Luxury Spectrum) -->
+        <!-- PRIMARY ACCENT GLOW -->
+        <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <!-- SECONDARY ACCENT GLOW (Gold) -->
+        <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center relative z-10">
+            
+            <!-- LEFT CONTENT COLUMN -->
+            <div class="flex flex-col items-start gap-8 animate-fade-in-up">
+                
+                <!-- BADGE -->
+                <!-- SECONDARY ACCENT BORDER & PRIMARY ACCENT GLOW -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-secondary-dim bg-white/5 backdrop-blur-sm shadow-sm">
+                    <span class="relative flex h-2 w-2">
+                        <!-- PRIMARY ACCENT DOT -->
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    <span class="text-xs font-semibold tracking-wide text-textPrimary">Live now for Students</span>
+                
+                </div>
+
+                <!-- MAIN HEADING -->
+                <!-- TEXT GRADIENT utilizing Gold and Red -->
+                <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.1]">
+                    ONE STOP <br>
+                    Learning Platform,<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">CS & AI</span>
+                </h1>
+
+                <!-- DESCRIPTION -->
+                <!-- BUTTON TEXT COLOR -->
+                <p class="text-lg text-textSecondary max-w-xl leading-relaxed">
+                    PatternPath is a free, pattern-based learning platform that helps engineering students learn once, revise intelligently, and retain core concepts for real interviews without selling courses or certificates. 
+                </p>
+
+                <!-- CTA BUTTONS -->
+                <div class="flex flex-wrap items-center gap-4 w-full">
+                    <!-- SECONDARY OUTLINE BUTTON (Simulated with dark bg + border) -->
+                    <a href="auth/login.html" class="px-8 py-3.5 bg-transparent border border-secondary text-secondary font-bold rounded-full hover:bg-secondary hover:text-textPrimary transition-all duration-300 hover:-translate-y-1">
+                        Start Learning for Free
+                    </a>
+                    
+                    <!-- PRIMARY ACCENT BUTTON -->
+                    <a href="auth/login.html" class="px-8 py-3.5 bg-gradient-to-r from-primary to-[#8a000f] text-textPrimary font-bold rounded-full transition-all duration-300 hover:-translate-y-1 shadow-[0_4px_30px_rgba(173,0,19,0.3)] hover:shadow-[0_0_40px_rgba(173,0,19,0.5)] flex items-center gap-2">
+                        Explore more
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                </div>
+
+                <!-- FEATURES LIST -->
+                <ul class="flex flex-col gap-3 mt-4 text-sm text-textMuted">
+                    <li class="flex items-center gap-3">
+                         <!-- SECONDARY ACCENT ICON -->
+                         <div class="p-1 rounded bg-[#1a1a1a] border border-secondary-dim"><svg class="w-3 h-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                         Learn through patterns, not scattered problems, making concepts easier to recognize in real interviews.
+                    </li>
+                    <li class="flex items-center gap-3">
+                         <div class="p-1 rounded bg-[#1a1a1a] border border-secondary-dim"><svg class="w-3 h-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                         Free, structured explanations and editorials that focus on clarity, intuition, and real world usage.
+                    </li>
+                    <li class="flex items-center gap-3">
+                         <div class="p-1 rounded bg-[#1a1a1a] border border-secondary-dim"><svg class="w-3 h-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                         Progress and revision tracking to build consistency instead of chasing streaks or rankings.
+                    </li>
+                    <li class="flex items-center gap-3">
+                         <div class="p-1 rounded bg-[#1a1a1a] border border-secondary-dim"><svg class="w-3 h-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                         On demand doubt support via peers and mentors, ensuring no learner gets stuck alone.
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- RIGHT CONTENT COLUMN (VISUALS) -->
+            <div class="relative h-[600px] w-full flex items-center justify-center perspective-1000 hidden lg:flex">
+                
+                <!-- ORBITAL RINGS BG - SECONDARY DIM COLOR -->
+                <div class="absolute w-[600px] h-[600px] border border-secondary/10 rounded-full"></div>
+                <div class="absolute w-[450px] h-[450px] border border-secondary/10 rounded-full"></div>
+
+                <!-- MAIN CODE CARD -->
+                <!-- GLASS PANEL custom class utilizes the new palette vars -->
+                <div class="relative z-20 w-[90%] max-w-md glass-panel rounded-2xl p-6 shadow-2xl animate-float">
+                    
+                    <!-- Editor Header -->
+                    <div class="flex items-center justify-between mb-4 border-b border-secondary-dim pb-2">
+                        <div class="flex items-center gap-1.5">
+                            <!-- RED / GOLD / GREY DOTS (No green/blue/yellow) -->
+                            <div class="w-3 h-3 rounded-full bg-primary/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-secondary/80"></div>
+                            <div class="w-3 h-3 rounded-full bg-gray-600/80"></div>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs text-textMuted">
+                             <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8z"/></svg>
+                             PROBLEM: Two Sum
+                        </div>
+                    </div>
+
+                    <!-- Code Content (Strict Palette: Gold, Red, Muted) -->
+                    <div class="font-mono text-xs sm:text-sm leading-relaxed overflow-hidden text-textSecondary">
+                        <div class="text-textMuted mb-2">// Traverse the array once and maintain map..</div>
+                        
+                        <div class="pl-0"><span class="text-primary">#include</span> <span class="text-secondary">&lt;iostream&gt;</span></div>
+                        <div class="pl-0"><span class="text-primary">#include</span> <span class="text-secondary">&lt;vector&gt;</span></div>
+                        <div class="pl-0"><span class="text-secondary">using namespace</span> std;</div>
+                        <br>
+                        <div class="pl-0"><span class="text-secondary">int</span> <span class="text-primary">main</span>() {</div>
+                        <div class="pl-4">  vector&lt;<span class="text-secondary">int</span>&gt; arr = {<span class="text-primary">1</span>, <span class="text-primary">2</span>, <span class="text-primary">3</span>, <span class="text-primary">4</span>, <span class="text-primary">5</span>};</div>
+                        <br>
+                        <div class="pl-4">  <span class="text-secondary">int</span> sum = <span class="text-primary">0</span>;</div>
+                        <div class="pl-4">  <span class="text-primary">for</span> (<span class="text-secondary">int</span> num : arr) {</div>
+                        <div class="pl-8">    sum += num;</div>
+                        <div class="pl-4">  }</div>
+                        <br>
+                        <div class="pl-4">  cout &lt;&lt; sum &lt;&lt; endl; <span class="text-textMuted">// Output: 15</span></div>
+                        <div class="pl-4">  <span class="text-primary">return</span> <span class="text-primary">0</span>;</div>
+                        <div class="pl-0">}</div>
+                    </div>
+                    
+                    <!-- Run Button in Editor: PRIMARY ACCENT -->
+                    <div class="absolute bottom-6 right-6">
+                        <button class="bg-primary hover:bg-primary-hover text-textPrimary text-xs px-3 py-1 rounded shadow-lg transition-colors">Run</button>
+                    </div>
+
+                </div>
+
+                <!-- FLOATING ELEMENT: Anusha Jha (Right Middle) -->
+                <!-- GLASS PANEL class -->
+                <div class="absolute -right-4 top-1/3 z-30 animate-float-delayed">
+                   <div class="glass-panel p-3 rounded-xl shadow-2xl flex items-center gap-3 w-64 transform translate-x-4">
+                       <!-- Avatar border primary -->
+                       <div class="w-10 h-10 rounded-full border border-primary p-[1px]">
+                           <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Anusha" alt="Anusha" class="w-full h-full rounded-full bg-black object-cover grayscale opacity-90">
+                       </div>
+                       <div>
+                           <div class="text-textPrimary text-sm font-bold">Anusha Jha</div>
+                           <!-- SECONDARY ACCENT for text highlight -->
+                           <div class="text-xs text-textMuted flex items-center gap-1">Joined <span class="text-secondary font-bold">Deloitte.</span></div>
+                       </div>
+                   </div>
+                </div>
+
+                <!-- FLOATING ELEMENT: Rohit Sharma (Top Left) -->
+                <div class="absolute left-0 top-0 z-10 animate-float">
+                   <div class="glass-panel p-3 rounded-xl shadow-2xl flex items-center gap-3 w-56 -rotate-2">
+                       <div class="w-10 h-10 rounded-full border border-secondary p-[1px]">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Rohit" alt="Rohit" class="w-full h-full rounded-full bg-black object-cover grayscale opacity-90">
+                       </div>
+                       <div>
+                           <div class="text-textPrimary text-sm font-bold">Rohit Sharma</div>
+                           <div class="text-xs text-textMuted flex items-center gap-1">Joined <span class="text-primary font-bold">Amazon</span></div>
+                       </div>
+                   </div>
+                </div>
+
+                <!-- FLOATING ELEMENT: Kushagra Sahay (Bottom Center) -->
+                <div class="absolute bottom-10 left-12 z-30 animate-float-delayed">
+                   <div class="glass-panel p-3 rounded-xl shadow-2xl flex items-center gap-3 w-60 rotate-1">
+                       <div class="w-10 h-10 rounded-full border border-white/20 p-[1px]">
+                            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kushagra" alt="Kushagra" class="w-full h-full rounded-full bg-black object-cover grayscale opacity-90">
+                       </div>
+                       <div>
+                           <div class="text-textPrimary text-sm font-bold">Kushagra Sahay</div>
+                           <div class="text-xs text-textMuted flex items-center gap-1">Joined <span class="text-textSecondary font-bold">Linked<span class="bg-secondary text-black px-0.5 rounded-[1px] ml-[1px]">in</span></span></div>
+                       </div>
+                   </div>
+                </div>
+
+                <!-- FLOATING TECH ICON: JS (Bottom Left) -->
+                <!-- SECONDARY ACCENT COLOR -->
+                <div class="absolute top-[60%] -left-6 z-0 animate-float">
+                    <div class="w-16 h-16 bg-[#1a1a1a] border border-secondary-dim rounded-2xl flex items-center justify-center shadow-2xl rotate-12">
+                         <span class="text-secondary font-bold text-2xl">JS</span>
+                    </div>
+                </div>
+
+                 <!-- FLOATING TECH ICON: Python (Bottom Right) -->
+                 <!-- MONOCHROME / ACCENT Adaptation -->
+                 <div class="absolute bottom-[20%] right-[-10px] z-0 animate-float-delayed">
+                    <div class="w-14 h-14 bg-[#1a1a1a] border border-secondary-dim rounded-2xl flex items-center justify-center shadow-2xl -rotate-6">
+                         <svg class="w-8 h-8 text-secondary" viewBox="0 0 24 24" fill="currentColor">
+                             <path d="M10 2C6.686 2 4 4.686 4 8v2h8V8h2v2h2V8c0-3.314-2.686-6-6-6h-2z" opacity="0.8"/>
+                             <path d="M14 22c3.314 0 6-2.686 6-6v-2h-8v2H10v-2H8v2c0 3.314 2.686 6 6 6h2z" />
+                         </svg>
+                    </div>
+                </div>
+
+                 <!-- FLOATING TECH ICON: Java (Top Right - behind) -->
+                 <div class="absolute top-[10%] right-[10%] z-0 opacity-60">
+                     <div class="w-12 h-12 bg-[#1a1a1a] border border-white/5 rounded-xl flex items-center justify-center shadow-xl rotate-[15deg]">
+                         <svg class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                     </div>
+                 </div>
+
+            </div> <!-- End Right Column -->
+
+        </div> <!-- End Grid container -->
+    </main>
+    
+    <!-- SCRIPTS -->
+    <script src="assets/script.js"></script>
+</body>
+</html>
