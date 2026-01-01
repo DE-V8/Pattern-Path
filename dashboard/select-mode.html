@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Mode | PatternPath</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+
+    <div class="fixed inset-0 z-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+
+    <div class="relative z-10 w-full max-w-6xl mb-12 flex items-end justify-between border-b border-white/5 pb-6">
+        <div>
+            <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Select Interview Module</h1>
+        </div>
+        <!-- LINK FIXED: Points to Home -->
+        <a href="../index.html" class="hidden md:block text-xs text-textMuted hover:text-white transition-colors uppercase tracking-widest">
+            < Esc to Main Menu
+        </a>
+    </div>
+
+    <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl">
+
+        <a href="video-interview.html" class="group glass-panel p-8 rounded-xl border border-white/5 hover:border-blue-500/50 transition-all duration-300 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <div class="relative z-10 flex flex-col h-full">
+                <div class="w-12 h-12 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.818v6.364a1 1 0 01-.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Video Interview</h3>
+                <p class="text-sm text-textSecondary mb-6 flex-grow">
+                    AI-simulated face-to-face HR round. Analyzes body language, tone, and answer confidence.
+                </p>
+                
+                <div class="border-t border-white/5 pt-4 mt-auto">
+                    <span class="text-[10px] text-blue-400 uppercase tracking-widest font-bold flex items-center gap-2">
+                        Start Cam <span class="group-hover:translate-x-1 transition-transform">-></span>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+        <a href="aptitude.html" class="group glass-panel p-8 rounded-xl border border-white/5 hover:border-secondary/50 transition-all duration-300 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-b from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <div class="relative z-10 flex flex-col h-full">
+                <div class="w-12 h-12 rounded bg-secondary/10 border border-secondary/20 flex items-center justify-center text-secondary mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-secondary transition-colors">Aptitude Test</h3>
+                <p class="text-sm text-textSecondary mb-6 flex-grow">
+                    Timed logic puzzles, quantitative reasoning, and data interpretation challenges.
+                </p>
+                
+                <div class="border-t border-white/5 pt-4 mt-auto">
+                    <span class="text-[10px] text-secondary uppercase tracking-widest font-bold flex items-center gap-2">
+                        Launch Quiz <span class="group-hover:translate-x-1 transition-transform">-></span>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+        <a href="interviews.html" class="group glass-panel p-8 rounded-xl border border-white/5 hover:border-primary/50 transition-all duration-300 relative overflow-hidden shadow-[0_0_20px_rgba(173,0,19,0.05)]">
+            <div class="absolute top-0 right-0 bg-primary/20 text-primary text-[9px] font-bold px-2 py-1 rounded-bl-lg border-l border-b border-primary/20 uppercase tracking-wider">Most Popular</div>
+            <div class="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            
+            <div class="relative z-10 flex flex-col h-full">
+                <div class="w-12 h-12 rounded bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                </div>
+                
+                <h3 class="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors">DSA Round</h3>
+                <p class="text-sm text-textSecondary mb-6 flex-grow">
+                    Live coding environment. Solve algorithmic problems with an AI interviewer watching your syntax.
+                </p>
+                
+                <div class="border-t border-white/5 pt-4 mt-auto">
+                    <span class="text-[10px] text-primary uppercase tracking-widest font-bold flex items-center gap-2">
+                        Initialize Shell <span class="group-hover:translate-x-1 transition-transform">-></span>
+                    </span>
+                </div>
+            </div>
+        </a>
+
+    </div>
+
+    <div class="mt-12 text-center relative z-10">
+        <p class="text-[10px] text-textMuted uppercase tracking-widest">
+            Results are synced to your PatternPath Profile
+        </p>
+    </div>
+
+</body>
+</html>

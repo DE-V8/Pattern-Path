@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aptitude Test | PatternPath</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        surface: '#1a1b1a',
+                        accent: { DEFAULT: '#a67d43', hover: '#c2924e', dim: 'rgba(166, 125, 67, 0.1)' }, // Gold
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen flex flex-col items-center justify-center p-6 relative">
+
+    <div class="fixed inset-0 z-0 bg-[linear-gradient(rgba(18,19,18,0.9),rgba(18,19,18,0.9)),url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+
+    <div class="relative z-10 w-full max-w-2xl">
+        
+        <!-- Added Back Link -->
+        <a href="select-mode.html" class="absolute -top-12 left-0 text-xs text-textSecondary hover:text-white mb-4 block"> < Exit </a>
+
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <span class="text-xs text-accent font-bold uppercase tracking-widest block mb-1">Quantitative Aptitude</span>
+                <div class="h-1 w-20 bg-accent rounded-full"></div>
+            </div>
+            <div class="flex items-center gap-3 bg-surface px-4 py-2 rounded border border-white/5">
+                <svg class="w-4 h-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span class="text-xl font-bold font-mono">09:45</span>
+            </div>
+        </div>
+
+        <div class="w-full h-1 bg-white/5 rounded-full mb-10 overflow-hidden">
+            <div class="h-full bg-accent w-1/4 shadow-[0_0_10px_rgba(166,125,67,0.5)]"></div>
+        </div>
+
+        <div class="bg-surface border border-white/5 rounded-xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-accent/10 to-transparent"></div>
+
+            <span class="text-textSecondary/50 text-xs uppercase tracking-widest mb-6 block">Question 3 of 10</span>
+            
+            <h2 class="text-xl md:text-2xl font-bold text-white mb-8 leading-snug">
+                Two trains running in opposite directions cross a man standing on the platform in 27 seconds and 17 seconds respectively. If they cross each other in 23 seconds, what is the ratio of their speeds?
+            </h2>
+
+            <div class="space-y-4">
+                <button class="group w-full text-left p-4 rounded border border-white/10 hover:border-accent hover:bg-accent/5 transition-all duration-200 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded flex items-center justify-center bg-white/5 text-textSecondary group-hover:bg-accent group-hover:text-black font-bold text-sm transition-colors">A</span>
+                    <span class="text-textSecondary group-hover:text-white">1 : 3</span>
+                </button>
+
+                <button class="group w-full text-left p-4 rounded border border-accent bg-accent/10 flex items-center gap-4 shadow-[0_0_15px_rgba(166,125,67,0.1)]">
+                    <span class="w-8 h-8 rounded flex items-center justify-center bg-accent text-black font-bold text-sm">B</span>
+                    <span class="text-white">3 : 2</span>
+                </button>
+
+                <button class="group w-full text-left p-4 rounded border border-white/10 hover:border-accent hover:bg-accent/5 transition-all duration-200 flex items-center gap-4">
+                    <span class="w-8 h-8 rounded flex items-center justify-center bg-white/5 text-textSecondary group-hover:bg-accent group-hover:text-black font-bold text-sm transition-colors">C</span>
+                    <span class="text-textSecondary group-hover:text-white">3 : 4</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-8">
+            <button class="text-xs text-textSecondary hover:text-white uppercase tracking-widest transition-colors disabled:opacity-50">
+                < Previous
+            </button>
+            <button class="px-8 py-3 bg-accent hover:bg-accent-hover text-black font-bold rounded shadow-lg hover:shadow-accent/20 transition-all uppercase tracking-widest text-xs">
+                Next Question
+            </button>
+        </div>
+
+    </div>
+
+</body>
+</html>

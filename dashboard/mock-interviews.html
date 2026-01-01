@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Access Restricted | PatternPath</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.15)' },
+                        terminal: '#1a1b1a',
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-terminal {
+            background: rgba(26, 27, 26, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(173, 0, 19, 0.2);
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(173, 0, 19, 0.1);
+            position: absolute;
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+    </style>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-5 pointer-events-none"></div>
+
+    <main class="relative z-10 w-full max-w-2xl glass-terminal rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(173,0,19,0.15)] border border-primary/30">
+        <div class="scanline"></div>
+        
+        <div class="bg-primary/10 px-6 py-4 border-b border-primary/20 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Security Protocol: Required</span>
+            </div>
+            <!-- LINK FIXED: Points to Home -->
+            <a href="../index.html" class="text-[10px] text-textMuted hover:text-white transition-colors">EXIT_SESSION</a>
+        </div>
+
+        <div class="p-10 text-center">
+            <div class="mb-8 inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/5 border border-primary/20 shadow-[0_0_30px_rgba(173,0,19,0.1)]">
+                <svg class="w-10 h-10 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+            </div>
+
+            <h1 class="text-3xl font-bold mb-4 tracking-tighter">Premium Access Required</h1>
+            <p class="text-textSecondary text-sm mb-10 max-w-md mx-auto leading-relaxed">
+                Mock Interviews require dedicated compute resources and expert evaluator algorithms. Upgrade to unlock full access.
+            </p>
+
+            <div class="bg-white/[0.03] border border-secondary/20 rounded-xl p-6 mb-10 text-left">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-secondary text-xs font-bold uppercase tracking-widest">Lifetime License</span>
+                    <span class="text-2xl font-bold text-white">$2</span>
+                </div>
+                <ul class="space-y-3 text-xs text-textSecondary mb-6">
+                    <li class="flex items-center gap-2">
+                        <span class="text-primary">✓</span> Unlimited AI-Driven Mock Sessions
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-primary">✓</span> Detailed Skill Heatmaps
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <span class="text-primary">✓</span> Priority Interviewer Queue
+                    </li>
+                </ul>
+                <!-- LINK FIXED: Points to sibling select-mode.html -->
+                <a href="select-mode.html" class="block w-full text-center py-4 bg-primary hover:bg-primary-hover text-white font-bold rounded-lg transition-all duration-300 shadow-[0_0_20px_rgba(173,0,19,0.4)] uppercase tracking-widest text-sm">
+                    Unlock Now
+                </a>
+
+            </div>
+
+            <p class="text-[10px] text-textMuted uppercase tracking-[0.2em]">
+                Secure Payment via Stripe • Encrypted Transactions
+            </p>
+        </div>
+    </main>
+
+</body>
+</html>

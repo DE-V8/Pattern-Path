@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Topics | PatternPath</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../assets/styles.css"> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        primary: { DEFAULT: '#ad0013', hover: '#8a000f', glow: 'rgba(173, 0, 19, 0.5)' },
+                        secondary: { DEFAULT: '#a67d43', dim: 'rgba(166, 125, 67, 0.25)' },
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                        textMuted: 'rgba(237, 237, 237, 0.45)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased min-h-screen pb-20">
+
+    <div class="fixed inset-0 z-0 bg-tech-pattern opacity-10 pointer-events-none"></div>
+
+    <!-- HEADER (Consistent with Patterns.html) -->
+    <header class="fixed w-full top-0 z-50 backdrop-blur-md border-b border-secondary-dim bg-[#121312]/80 h-16 flex items-center px-6 justify-between">
+        <a href="../index.html" class="flex items-center gap-2 group">
+            <svg class="h-6 w-6" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V32" stroke="#ad0013" stroke-width="4" stroke-linecap="round"/>
+                <path d="M12 8H20C26.6274 8 32 13.3726 32 20C32 26.6274 26.6274 32 20 32H12" stroke="#a67d43" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <span class="font-bold tracking-tight text-textPrimary">PatternPath</span>
+        </a>
+        <nav class="flex items-center gap-6 text-sm font-medium">
+            <a href="patterns.html" class="text-textSecondary hover:text-white transition-colors">DSA Sheets</a>
+            <a href="topics.html" class="text-primary font-bold">Topics</a>
+            <a href="../mentorship/chat.html" class="text-textSecondary hover:text-white transition-colors">Mentorship</a>
+            <a href="../profile/index.html" class="text-textSecondary hover:text-white transition-colors">Profile</a>
+             <button id="logoutBtn" class="text-xs font-bold text-textMuted hover:text-primary transition-colors uppercase tracking-wider border border-transparent hover:border-primary/20 bg-transparent hover:bg-primary/10 px-3 py-1.5 rounded-full ml-2">
+                Logout
+            </button>
+        </nav>
+    </header>
+
+    <main class="relative z-10 max-w-7xl mx-auto px-6 pt-28">
+        
+        <div class="mb-12 text-center">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">📚 DSA Topic Explorer</h1>
+            <p class="text-textSecondary max-w-2xl mx-auto">Prepare by mastering individual Data Structures and Algorithms systematically.</p>
+        </div>
+
+        <div class="mb-6 flex items-center gap-3">
+            <div class="h-px bg-secondary/30 flex-1"></div>
+            <span class="text-secondary font-bold tracking-widest text-sm uppercase">Data Structures</span>
+            <div class="h-px bg-secondary/30 flex-1"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            
+            <a href="../patterns/arrays.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Arrays</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-secondary border border-secondary-dim group-hover:border-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-[45%]"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>25 Problems</span><span>45%</span></div>
+            </a>
+
+            <!-- INTENTIONAL MAPPING: Strings -> Arrays (Since specific Strings page missing) until created -->
+            <a href="../patterns/arrays.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Strings</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-[20%]"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>20 Problems</span><span>20%</span></div>
+            </a>
+
+            <a href="../patterns/linked-list.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Linked Lists</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>18 Problems</span><span>0%</span></div>
+            </a>
+
+            <a href="../patterns/stacks.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Stacks & Queues</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-[10%]"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>15 Problems</span><span>10%</span></div>
+            </a>
+
+            <a href="../patterns/tree-dfs.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Trees</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>30 Problems</span><span>0%</span></div>
+            </a>
+
+             <a href="../patterns/graphs.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Graphs</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>35 Problems</span><span>0%</span></div>
+            </a>
+        </div>
+
+        <div class="mb-6 flex items-center gap-3">
+            <div class="h-px bg-secondary/30 flex-1"></div>
+            <span class="text-secondary font-bold tracking-widest text-sm uppercase">Algorithms</span>
+            <div class="h-px bg-secondary/30 flex-1"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            
+            <a href="../patterns/sort-search.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Searching</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-[60%]"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>12 Problems</span><span>60%</span></div>
+            </a>
+
+            <a href="../patterns/sort-search.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Sorting</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>15 Problems</span><span>0%</span></div>
+            </a>
+
+            <!-- MAPPED: Recursion -> Backtracking -->
+            <a href="../patterns/backtracking.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Recursion</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>22 Problems</span><span>0%</span></div>
+            </a>
+
+            <a href="../patterns/dynamic-programming.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Dyn. Programming</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>40 Problems</span><span>0%</span></div>
+            </a>
+
+            <a href="../patterns/greedy.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Greedy</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>18 Problems</span><span>0%</span></div>
+            </a>
+
+            <a href="../patterns/bitwise.html" class="group glass-panel p-6 rounded-xl border border-secondary-dim hover:border-secondary transition-all duration-300 hover:bg-white/[0.07] block relative overflow-hidden">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-bold text-textPrimary group-hover:text-primary transition-colors">Bit Manipulation</h3>
+                    <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-textMuted border border-secondary-dim group-hover:border-secondary group-hover:text-secondary">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-[#1a1a1a] rounded overflow-hidden"><div class="h-full bg-primary w-0"></div></div>
+                <div class="mt-2 flex justify-between text-xs text-textMuted"><span>14 Problems</span><span>0%</span></div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../assets/init-supabase.js"></script>
+    <script src="../assets/supabase-client.js"></script>
+    <script src="../assets/credits.js"></script>
+    <script src="../assets/auth.js"></script>
+    <script>
+        Auth.requireLogin();
+        // Logout Wiring
+        document.addEventListener('DOMContentLoaded', () => {
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    Auth.logout();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

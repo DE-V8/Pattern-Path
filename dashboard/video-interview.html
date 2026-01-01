@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behavioral Interview | PatternPath</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#121312',
+                        surface: '#1a1b1a',
+                        accent: { DEFAULT: '#3b82f6', hover: '#2563eb', glow: 'rgba(59, 130, 246, 0.5)' }, // Blue
+                        textPrimary: '#ededed',
+                        textSecondary: 'rgba(237, 237, 237, 0.7)',
+                    },
+                    fontFamily: { mono: ['"JetBrains Mono"', 'monospace'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .audio-wave {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            height: 20px;
+        }
+        .bar {
+            width: 3px;
+            background: #3b82f6;
+            animation: wave 1s ease-in-out infinite;
+        }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes wave {
+            0%, 100% { height: 20%; opacity: 0.5; }
+            50% { height: 100%; opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-background text-textPrimary font-mono antialiased h-screen flex flex-col overflow-hidden relative">
+
+    <header class="h-16 px-6 border-b border-white/5 bg-surface flex items-center justify-between z-20">
+        <div class="flex items-center gap-3">
+            <span class="font-bold tracking-tight">PatternPath <span class="text-accent text-xs uppercase tracking-widest border border-accent/30 px-2 py-0.5 rounded ml-2">Video Mode</span></span>
+        </div>
+        <div class="flex items-center gap-4">
+             <div class="audio-wave">
+                <div class="bar h-2"></div><div class="bar h-4"></div><div class="bar h-3"></div><div class="bar h-5"></div><div class="bar h-2"></div>
+            </div>
+            <span class="text-xs text-accent uppercase font-bold tracking-wider animate-pulse">AI Listening</span>
+        </div>
+    </header>
+
+    <main class="flex-1 relative bg-black flex items-center justify-center overflow-hidden">
+        
+        <div class="absolute inset-0 bg-neutral-900">
+            <div class="w-full h-full flex flex-col items-center justify-center text-textSecondary/20">
+                <svg class="w-24 h-24 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M15 10l4.553-2.276A1 1 0 0121 8.818v6.364a1 1 0 01-.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                <p class="uppercase tracking-widest text-sm">Camera Feed Active</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-24 left-0 right-0 px-6 flex justify-center">
+            <div class="bg-surface/90 backdrop-blur-md border border-white/10 p-6 rounded-2xl max-w-3xl w-full shadow-2xl transform transition-all hover:scale-[1.01]">
+                <p class="text-accent text-xs font-bold uppercase mb-2 tracking-widest">Question 1 of 5 • Behavioral</p>
+                <h2 class="text-xl md:text-2xl font-medium text-white leading-relaxed">
+                    "Tell me about a time you had a conflict with a team member. How did you resolve it?"
+                </h2>
+            </div>
+        </div>
+
+        <div class="absolute top-6 right-6 w-48 h-32 bg-surface border border-white/10 rounded-lg shadow-xl overflow-hidden flex items-center justify-center group cursor-pointer hover:border-accent/50 transition-colors">
+            <div class="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center relative">
+                <div class="absolute inset-0 rounded-full border border-accent/50 animate-ping"></div>
+                <span class="text-accent font-bold text-xs">AI</span>
+            </div>
+            <div class="absolute bottom-2 left-3 text-[10px] text-white/50 uppercase tracking-widest">Interviewer</div>
+        </div>
+
+    </main>
+
+    <footer class="h-20 bg-surface border-t border-white/5 flex items-center justify-center gap-6 z-20">
+        <button class="p-4 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg></button>
+        <!-- ADDED ONCLICK TO EXIT -->
+        <button onclick="window.location.href='select-mode.html'" class="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-full transition-all shadow-lg flex items-center gap-2">
+            <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> End Call
+        </button>
+        <button class="p-4 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all"><svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.818v6.364a1 1 0 01-.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg></button>
+    </footer>
+
+</body>
+</html>
